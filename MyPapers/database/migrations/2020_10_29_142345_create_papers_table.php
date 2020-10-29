@@ -22,6 +22,7 @@ class CreatePapersTable extends Migration
             $table->text('status');
             $table->text('file');
             $table->text('preview');
+            $table->id('userId');
         });
     }
 
