@@ -20,3 +20,6 @@ Route::get('/', function () {
 Route::get('/signup', 'UserController@showSignUp');
 Route::post('/signup', 'UserController@doSignUp');
 Route::get('/login', 'UserControler@doLogin');
+
+Route::get('/paper', 'PaperController@showPaperData');
+Route::post('/paper', 'PaperController@insertPaperData');
