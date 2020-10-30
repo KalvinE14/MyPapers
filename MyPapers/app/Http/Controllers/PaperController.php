@@ -28,6 +28,11 @@ class PaperController extends Controller
         return view('create_paper');
     }
 
+    public function showPaperDetail($paper_id, $user_id){
+        $papers = Paper::where('user_id', $user_id)->where('paper_id', $paper_id)->first();
+        return view('paper_detail', ['papers' => $papers]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([

@@ -26,6 +26,7 @@ Route::get('/paper/pending/{userid}', 'PaperController@showPendingPapers');
 Route::get('/paper/finished/{userid}', 'PaperController@showFinishedPapers');
 Route::get('/paper/create', 'PaperController@insertPaperData');
 Route::post('/paper', 'PaperController@store');
+Route::get('/paper/paper_detail/{paper_id}/{user_id}', 'PaperController@showPaperDetail');
 
 
 
