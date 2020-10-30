@@ -22,7 +22,7 @@ class UserController extends Controller
         
         auth()->login($user);
 
-        return redirect()->to('/login');
+        return view('login');
     }
 
     public function doLogin(){
