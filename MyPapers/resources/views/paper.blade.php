@@ -7,6 +7,13 @@
 </head>
 <body>
 <table border="1" cellpadding="10" cellspacing="0">
+
+        @if (session('status'))
+            <div>
+                {{ session('status') }}
+            </div>
+        @endif
+
         <tr>
             <th>ID</th>
             <th>Title</th>

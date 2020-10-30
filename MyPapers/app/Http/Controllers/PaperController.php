@@ -30,18 +30,25 @@ class PaperController extends Controller
 
     public function store(Request $request)
     {
-        $papers = new Paper;
-        $papers->title = $request->title;
-        $papers->type = $request->type;
-        $papers->requirement = $request->requirement;
-        $papers->description = $request->description;
-        $papers->status = $request->status;
-        $papers->file = $request->file;
-        $papers->preview = $request->file;
-        $papers->user_id = 1;
+        $request->validate([
+            'title' => 'required',
+            'type' => 'required',
+            'requirement' => 'required',
+            'description' => 'required',
+            'file' => 'nullable',
+        ]);
 
-        $papers->save();
+        Paper::create([
+            'title' => $request->title,
+            'type' => $request->type,
+            'requirement' => $request->requirement,
+            'description' => $request->description,
+            'status' => "Pending",
+            'file' => $request->file,
+            'preview' => null,
+            'user_id' => 1
+        ]);
 
-        return redirect('/paper');
+        return redirect('/paper')->with('status', 'Paper has been created!');
     }
 }
