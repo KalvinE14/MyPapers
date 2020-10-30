@@ -22,4 +22,26 @@ class PaperController extends Controller
         $papers = Paper::where('user_id', $userid)->where('status', 'Finished')->get();
         return view('paper', ['papers' => $papers]);
     }
+
+    public function insertPaperData()
+    {
+        return view('create_paper');
+    }
+
+    public function store(Request $request)
+    {
+        $papers = new Paper;
+        $papers->title = $request->title;
+        $papers->type = $request->type;
+        $papers->requirement = $request->requirement;
+        $papers->description = $request->description;
+        $papers->status = $request->status;
+        $papers->file = $request->file;
+        $papers->preview = $request->file;
+        $papers->user_id = 1;
+
+        $papers->save();
+
+        return redirect('/paper');
+    }
 }

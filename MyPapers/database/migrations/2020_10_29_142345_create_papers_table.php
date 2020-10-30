@@ -20,10 +20,11 @@ class CreatePapersTable extends Migration
             $table->string('requirement');
             $table->string('description');
             $table->string('status');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->string('preview')->nullable();
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreignId('user_id');
+            $table->timestamps();
         });
     }
 
