@@ -21,5 +21,7 @@ Route::get('/signup', 'UserController@showSignUp');
 Route::post('/signup', 'UserController@doSignUp');
 Route::get('/login', 'UserControler@doLogin');
 
-Route::get('/paper', 'PaperController@showPaperData');
+Route::get('/paper', 'PaperController@showAllPaperData');
+Route::get('/paper/pending/{userid}', 'PaperController@showPendingPapers');
+Route::get('/paper/finished/{userid}', 'PaperController@showFinishedPapers');
 Route::post('/paper', 'PaperController@insertPaperData');
