@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 Route::get('/signup', 'UserController@showSignUp');
 Route::post('/signup', 'UserController@doSignUp');
-Route::get('/login', 'UserControler@doLogin');
+Route::post('/login', 'UserController@doLogin');
+Route::get('/login', 'UserController@showLogin');
 
 Route::get('/paper', 'PaperController@showAllPaperData');
 Route::get('/paper/pending/{userid}', 'PaperController@showPendingPapers');
