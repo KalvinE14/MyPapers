@@ -48,10 +48,19 @@
             <div class="form-group"> 
                 <label for="file">File Upload :</label>
                 <input type="file" name="image" id="image">
-                  
-                @error('title')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+                
+
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger" role="alert">
+                        File Upload Error ! <br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                 
             </div>
                 
             <div class="form-group">

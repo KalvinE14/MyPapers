@@ -33,8 +33,8 @@
                 <td> {{$p->requirement}} </td>
                 <td> {{$p->description}} </td>
                 <td> {{$p->status}} </td>
-                <td> {{$p->file}} </td>
-                <td> {{$p->preview}} </td>
+                <td> <img src="{{ url('assets/' . $p->file) }}" alt="..." width="200px"> </td>
+                <td> <img src="{{ url('assets/' . $p->preview) }}" alt="..." width="200px"> </td>
             </tr>
         @endforeach
     </table>

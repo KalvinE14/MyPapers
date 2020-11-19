@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Paper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PaperController extends Controller
 {
@@ -35,13 +36,17 @@ class PaperController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'type' => 'required',
             'requirement' => 'required',
             'description' => 'required',
-            'file' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
+
+        if($validator->fails()){
+            return view('create_paper')->withErrors($validator->errors());
+        }
 
         Paper::create([
             'title' => $request->title,
@@ -53,8 +58,11 @@ class PaperController extends Controller
             'preview' => null,
             'user_id' => 1
         ]);
-
-        $request->image->store('assets');
+        
+        $image = $request->file('image');
+        $name = $request->file('image')->getClientOriginalName();
+        
+        $image->move(public_path("assets"), $name);
 
         return redirect('/papers')->with('status', 'Paper has been created!');
     }
