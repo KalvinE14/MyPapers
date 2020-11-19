@@ -49,11 +49,13 @@ class PaperController extends Controller
             'requirement' => $request->requirement,
             'description' => $request->description,
             'status' => "Pending",
-            'file' => $request->file,
+            'file' => $request->file('image')->getClientOriginalName(),
             'preview' => null,
             'user_id' => 1
         ]);
 
-        return redirect('/paper')->with('status', 'Paper has been created!');
+        $request->image->store('assets');
+
+        return redirect('/papers')->with('status', 'Paper has been created!');
     }
 }

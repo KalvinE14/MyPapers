@@ -10,7 +10,7 @@
     <h1>Create Paper</h1>
 
     <div class="col-7">
-        <form action="/paper" method="post" >
+        <form action="/paper" method="post" enctype="multipart/form-data">
             @csrf
             <!-- <input type="hidden" name="userid" value="Input::get('userid')"> -->
             <div class="form-group">
@@ -38,13 +38,22 @@
             </div>
             
             <div class="form-group">
-                    <label for="file">File Upload :</label>
-                    <input type="text" name="file" id="file">
-                    @error('title')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <label for="description">Description :</label>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" name="description" id="description" placeholder="Text Input">
+                @error('title')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
+            <div class="form-group"> 
+                <label for="file">File Upload :</label>
+                <input type="file" name="image" id="image">
+                  
+                @error('title')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+                
             <div class="form-group">
                 <button type="submit" name="insert">Submit and Pay</button>
             </div>
