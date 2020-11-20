@@ -52,7 +52,7 @@
         </div>
 
         <div class="mt-3">
-            <button type="button" class="btn btn-primary">Download Paper</button>
+            <a class="btn btn-primary" href="/download/{{$papers->preview}}" role="button">Download Paper</a>
         </div>
     </div>
 

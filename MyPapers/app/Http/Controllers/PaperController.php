@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Paper;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class PaperController extends Controller
@@ -65,5 +67,11 @@ class PaperController extends Controller
         $image->move(public_path("assets"), $name);
 
         return redirect('/papers')->with('status', 'Paper has been created!');
+    }
+
+    public function downloadPaper($preview){
+        $file = public_path('assets/').$preview;
+
+        return response()->download($file);
     }
 }

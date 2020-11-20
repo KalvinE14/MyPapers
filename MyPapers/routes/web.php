@@ -29,5 +29,6 @@ Route::get('/paper/create', 'PaperController@insertPaperData');
 Route::post('/paper', 'PaperController@store');
 Route::get('/paper/paper_detail/{paper_id}/{user_id}', 'PaperController@showPaperDetail');
 
+Route::get('/download/{preview}', 'PaperController@downloadPaper');
 
 
