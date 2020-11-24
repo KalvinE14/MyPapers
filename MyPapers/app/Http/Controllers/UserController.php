@@ -41,12 +41,13 @@ class UserController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
         else{
-            if(!User::where('username', 'like', "%$username%")->where('password', 'like', "%$password%")->first()){
+            $user = User::where('username', $username)->where('password', $password)->first();
+            if(!$user){
                 $validator->getMessageBag()->add('errorPassword', 'The password is wrong');
                 return redirect()->back()->withErrors($validator->errors());
             }
-            $request->session()->put('data', $request->input());
-           return view('create_paper'); 
+            $request->session()->put('data', $user);
+            return view('create_paper'); 
         }
         
     }
