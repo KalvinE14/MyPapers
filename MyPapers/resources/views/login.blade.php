@@ -1,11 +1,17 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 </head>
-<body>
+<body> -->
+@extends('template')
+
+@section('konten')
+
+    <center>
+
     <h2>Login</h2>
     <form action="/login" method="POST">
         {{csrf_field()}}
@@ -26,7 +32,9 @@
             <p style="color:red">{{$errors->first()}}</p>
         @endif
     </form>
-</body>
-</html>
+
+    </center>
+<!-- </body>
+</html> -->
 
 
