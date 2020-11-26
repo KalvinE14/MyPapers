@@ -2,6 +2,7 @@
 
 @section('konten')
 
+<div style = "height: 400px;">
     <center>
 
     <h2>Login</h2>
@@ -24,5 +25,7 @@
             <p style="color:red">{{$errors->first()}}</p>
         @endif
     </form>
+
+    </div>
 @endsection
 

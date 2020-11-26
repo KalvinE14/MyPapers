@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('konten')
-
+<div style = "height: 400px;">
     <center>
     
     <h2>Sign Up</h2>
@@ -41,4 +41,5 @@
         @endif
 
     </form>
+    </div>
 @endsection

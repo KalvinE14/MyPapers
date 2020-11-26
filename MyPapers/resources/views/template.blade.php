@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
-            body{background-color: grey;}
+            body {background-color: grey;}
+            body {height: 80px;}
     </style>
 
 </head>
 <body>
 
-    <div style="background-color:powderblue;">
-        <center> <img src="{{url('assets/logo.png')}}" style="width:200px;height:200px;" /> </center>
+    <div>
+         <img src="{{url('assets/logo.png')}}" style="width:100px;height:100px;" /> 
         <hr>
         
     </div>
