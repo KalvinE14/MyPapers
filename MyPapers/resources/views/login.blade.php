@@ -2,30 +2,36 @@
 
 @section('konten')
 
-<div style = "height: 400px;">
-    <center>
+<head>
+<link rel="stylesheet" type="text/css" href="{{asset('css/login.css')}}">
+</head>
 
-    <h2>Login</h2>
-    <form action="/login" method="POST">
-        {{csrf_field()}}
-        <div class="form-group">
-            <label for="name">Username:</label>
-            <input type="text" class="form-control" id="username" name="username">
-        </div>
-
-        <div class="form-group">
-            <label for="name">Password:</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-        <div class="form-group">
-            <button style="cursor:pointer" type="submit" class="btn btn-primary">Submit</button>
-        </div>
+<head>
+    <meta charset="utf-8">
+    <title>Login </title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+    <div class="container">
+      <section id="content">
+        <form action="">
+          <h1>Login</h1>
+          <div>
+            <input type="text" placeholder="Username" required="" id="username" />
+          </div>
+          <div>
+            <input type="password" placeholder="Password" required="" id="password" />
+          </div>
+          <div>
+            <input type="submit" value="Log in" />
+            <a href="#">Register</a>
+          </div>
+        </form><!-- form -->
         
-        @if($errors->any())
-            <p style="color:red">{{$errors->first()}}</p>
-        @endif
-    </form>
-
-    </div>
+      </section><!-- content -->
+    </div><!-- container -->
+    </body>
+    </html>
+  
 @endsection
 
