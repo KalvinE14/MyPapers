@@ -1,12 +1,83 @@
 @extends('template')
 
-@section('konten')
+@section('title', 'Login and Register')
 
-<head>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/register.css')}}">
-</head>
+@section('content')
 
-<h2>Registration</h2>
+<!-- <link rel="stylesheet" type="text/css" href="{{asset('css/register.css')}}"> -->
+
+
+<div class="row">
+	<div class="container-fluid" style="background-color: red; width: 500px;">
+		<h1>Register</h1>
+		<form action="/signup" method="post">
+			{{csrf_field()}}
+			<div class="form-group">
+				<label for="name">Name:</label>
+				<input type="text" class="form-control" name="name" id="name">
+			</div>
+
+			<div class="form-group">
+				<label for="name">Username:</label>
+				<input type="text" class="form-control" name="username" id="username">
+			</div>
+
+			<div class="form-group">
+				<label for="name">Password:</label>
+				<input type="password" class="form-control" name="password" id="password">
+			</div>
+
+			<div class="form-group">
+				<label for="name">Address:</label>
+				<input type="text" class="form-control" name="address" id="address">
+			</div>
+
+			<div class="form-group">
+				<label for="name">Date of Birth:</label>
+				<input type="text" class="form-control" name="dob" id="dob">
+			</div>
+
+			<div class="form-group">
+				<label for="name">Gender:</label>
+				<input type="text" class="form-control" name="gender" id="gender">
+			</div>
+
+			<div class="form-group">
+				<button style="cursor:pointer;" type="submit" class="btn btn-primary">Submit</button>
+			</div>
+
+			@if($errors->any())
+				<p style="color: yellow;">{{$errors->first()}}</p>
+			@endif
+		</form>
+	</div>
+
+	<div class="container-fluid" style="background-color: red; width: 500px;">
+		<h1>Login</h1>
+		<form action="/login" method="post">
+			{{csrf_field()}}
+			<div class="form-group">
+				<label for="name">Username:</label>
+				<input type="text" class="form-control" name="username" id="username">
+			</div>
+
+			<div class="form-group">
+				<label for="name">Password:</label>
+				<input type="password" class="form-control" name="password" id="password">
+			</div>
+
+			<div class="form-group">
+				<button style="cursor:pointer;" type="submit" class="btn btn-primary">Submit</button>
+			</div>
+
+			@if($errors->any())
+				<p style="color: yellow;">{{$errors->first()}}</p>
+			@endif
+		</form>
+	</div>
+</div>
+
+<!-- <h2>Registration</h2>
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
 		<form action="#">
@@ -40,20 +111,6 @@
 			</div>
 		</div>
 	</div>
-</div>
-
-<script>
-    const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
-
-signUpButton.addEventListener('click', () => {
-	container.classList.add("right-panel-active");
-});
-
-signInButton.addEventListener('click', () => {
-	container.classList.remove("right-panel-active");
-});
-</script>
+</div> -->
 
 @endsection

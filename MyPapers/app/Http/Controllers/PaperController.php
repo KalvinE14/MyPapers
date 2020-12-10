@@ -16,6 +16,12 @@ class PaperController extends Controller
         return view('paper', ['papers' => $papers]);
     }
 
+    public function showAllUserPaper($userId)
+    {
+        $papers = Paper::where('user_id', $userId)->get();
+        return view('paper_user', ['papers' => $papers]);
+    }
+
     public function showPendingPapers($userid){
         $papers = Paper::where('user_id', $userid)->where('status', 'Pending')->get();
         return view('paper', ['papers' => $papers]);

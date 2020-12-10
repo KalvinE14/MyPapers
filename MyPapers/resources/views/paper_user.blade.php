@@ -1,10 +1,25 @@
 @extends('template')
 
-@section('title', 'Paper')
+@section('title', "User's Paper")
 
 @section('content')
 
-<table border="1" cellpadding="10" cellspacing="0">
+    <div class="row" style="margin-left: 0px;margin-bottom: 10px;">
+        <div class="col-xs-6" style="margin-right: 10px;">
+            <a href="{{ route('pending_paper', 1) }}">
+                <button class="btn btn-danger" style="margin-top: 20px; ">Pending Paper</button>
+            </a>
+        </div>
+
+        <div class="col-xs-6">
+            <a href="{{ route('finished_paper', 1) }}">
+                <button class="btn btn-danger" style="margin-top: 20px; ">Finished Paper</button>
+            </a>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+        <table border="1" cellpadding="10" cellspacing="0">
 
         @if (session('status'))
             <div>
@@ -35,6 +50,7 @@
                 <td> <img src="{{ url('assets/' . $p->preview) }}" alt="..." width="200px"> </td>
             </tr>
         @endforeach
-    </table>
+        </table>
     </div>
-    @endsection
+ @endsection
+    

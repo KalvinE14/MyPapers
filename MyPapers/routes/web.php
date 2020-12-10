@@ -18,14 +18,14 @@ Route::get('/', function () {
 });
 
 Route::get('/signup', 'UserController@showSignUp');
-Route::post('/signup', 'UserController@doSignUp');
-Route::post('/login', 'UserController@doLogin');
-Route::get('/login', 'UserController@showLogin');
+Route::post('/signup', 'UserController@doSignUp')->name('register');
+Route::post('/login', 'UserController@doLogin')->name('login');
 
-Route::get('/papers', 'PaperController@showAllPaperData');
-Route::get('/paper/pending/{userid}', 'PaperController@showPendingPapers');
-Route::get('/paper/finished/{userid}', 'PaperController@showFinishedPapers');
-Route::get('/paper/create', 'PaperController@insertPaperData');
+Route::get('/papers', 'PaperController@showAllPaperData')->name('papers');
+Route::get('/papers/{userId}', 'PaperController@showAllUserPaper')->name('papers_user');
+Route::get('/papers/pending/{userid}', 'PaperController@showPendingPapers')->name('pending_paper');
+Route::get('/papers/finished/{userid}', 'PaperController@showFinishedPapers')->name('finished_paper');
+Route::get('/paper/create', 'PaperController@insertPaperData')->name('create_paper');
 Route::post('/paper', 'PaperController@store');
 Route::get('/paper/paper_detail/{paper_id}/{user_id}', 'PaperController@showPaperDetail');
 

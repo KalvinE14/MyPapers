@@ -24,7 +24,7 @@ class UserController extends Controller
         
         auth()->login($user);
 
-        return view('login');
+        return redirect()-back();
     }
 
     public function doLogin(Request $request){
@@ -47,14 +47,10 @@ class UserController extends Controller
                 return redirect()->back()->withErrors($validator->errors());
             }
             $request->session()->put('data', $user);
-            return view('create_paper'); 
+            return redirect()->route('create_paper');
         }
         
     }
 
-    public function showLogin(){
-        
-        return view('login');
-    }
 
 }

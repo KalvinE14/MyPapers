@@ -1,8 +1,9 @@
 @extends('template')
 
-@section('konten')
+@section('title', "Paper's Detail")
 
-<div style = "height: 400px;">
+@section('content')
+
 
     <div class="container-fluid">
         <div class="row">

@@ -1,8 +1,9 @@
 @extends('template')
 
-@section('konten')
+@section('title', 'Create Paper')
 
-<div style = "height: 400px;">
+@section('content')
+
     <center>
 
         <head>
@@ -14,7 +15,6 @@
     <div class="col-7">
         <form action="/paper" method="post" enctype="multipart/form-data">
             @csrf
-            <!-- <input type="hidden" name="userid" value="Input::get('userid')"> -->
             <div class="form-group">
                     <label for="title">Title : </label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="Text Input">
@@ -26,7 +26,7 @@
             <div class="form-group">
                     <label for="type">Types :</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" name="type" id="type" placeholder="Simple, Elegant, etc">
-                    @error('title')
+                    @error('type')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
             </div>
@@ -34,7 +34,7 @@
             <div class="form-group">
                     <label for="requirement">Requirement :</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" name="requirement" id="requirement" placeholder="Text Input">
-                    @error('title')
+                    @error('requirement')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
             </div>
@@ -42,7 +42,7 @@
             <div class="form-group">
                 <label for="description">Description :</label>
                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="description" id="description" placeholder="Text Input">
-                @error('title')
+                @error('description')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
@@ -50,19 +50,9 @@
             <div class="form-group"> 
                 <label for="file">File Upload :</label>
                 <input type="file" name="image" id="image">
-                
-
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger" role="alert">
-                        File Upload Error ! <br><br>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                 
+                @error('image')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
                 
             <div class="form-group">
