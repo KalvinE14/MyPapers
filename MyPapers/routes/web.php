@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('before_login_home');
 });
 
 Route::get('/signup', 'UserController@showSignUp');
