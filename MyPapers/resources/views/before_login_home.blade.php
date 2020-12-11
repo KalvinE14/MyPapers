@@ -32,9 +32,11 @@
       </div> 
     </div>
 
-    <div class="container" style="margin-top: 390px; margin-left: 248px;">
-      <button type="button" class="btn btn-danger" style="border-radius: 50px; padding: 0.5em 3em; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; color: white">Register</button>
+    <div class="container" style="margin-top: 390px;">
+      <div class="container">
+        <button type="button" class="btn btn-danger" style="border-radius: 50px; padding: 0.5em 3em; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; color: white">Register</button>
       <button type="button" class="btn btn-danger" style="background-color: transparent; margin-left: 24px; border: solid #d9534f; border-radius: 50px; padding: 0.5em 4em; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; color: white">Login</button>
+      </div>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
 
