@@ -52,5 +52,23 @@ class UserController extends Controller
         
     }
 
+    public function showLoginMenu()
+    {
+        return view('login.login_menu');
+    }
 
+    public function showLoginUser()
+    {
+        return view('login.login_user');
+    }
+
+    public function showLoginExpert()
+    {
+        return view('login.login_expert');
+    }
+
+    public function showLoginAdmin()
+    {
+        return view('login.login_admin');
+    }
 }

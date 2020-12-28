@@ -1,0 +1,33 @@
+@extends('template_guest.template_guest')
+@section('title', 'Login Menu')
+@section('content')
+   <div class="container" style="margin-top: 75px">
+    <div class="container" style="width: 100%; margin-bottom: 30px;">
+        <h1 style="color: white;">Login</h1>
+        <!-- <button type="button" class="btn btn-danger" style="border-radius: 50px; margin-left: 50px; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; color: white;width: 300px;">Login as User</button> -->
+    </div> 
+    
+	<div class="container" style="width: 100%; padding-right: 1000px; margin-bottom: 10px;">
+		@yield('action')
+			{{csrf_field()}}
+			<div class="form-group" style="margin-bottom: 20px;">
+				<label style="margin-bottom: 8px;color: white;" for="name">Username:</label>
+				<input type="text" class="form-control" name="username" id="username">
+			</div>
+
+			<div class="form-group" style="margin-bottom: 30px;">
+				<label style="margin-bottom: 8px;color: white;" for="name">Password:</label>
+				<input type="password" class="form-control" name="password" id="password">
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-danger" style="border-radius: 15px; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; color: white;width: 100px;">Submit</button>
+			</div>
+
+			@if($errors->any())
+				<p style="color: yellow;">{{$errors->first()}}</p>
+			@endif
+		</form>
+    </div>
+  </div>
+@endsection
