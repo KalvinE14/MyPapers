@@ -14,11 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('before_login_home');
+});
+
+Route::get('/home', function(){
     return view('template/home_template');
 });
 
 Route::get('/signup', 'UserController@showSignUp');
 Route::post('/signup', 'UserController@doSignUp')->name('register');
+Route::get('/login_menu', 'UserController@showLoginMenu')->name('login_menu');
+Route::get('/login_user', 'UserController@showLoginUser')->name('login_user');
+Route::get('/login_expert', 'UserController@showLoginExpert')->name('login_expert');
+Route::get('/login_admin', 'UserController@showLoginAdmin')->name('login_admin');
 Route::post('/login', 'UserController@doLogin')->name('login');
 
 Route::get('/papers', 'PaperController@showAllPaperData')->name('papers');
