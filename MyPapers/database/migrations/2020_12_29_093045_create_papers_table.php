@@ -24,6 +24,8 @@ class CreatePapersTable extends Migration
             $table->string('preview')->nullable();
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreignId('user_id');
+            $table->foreign('expert_id')->references('expert_id')->on('experts')->onDelete('cascade');
+            $table->foreignId('expert_id')->nullable();
             $table->timestamps();
         });
     }
