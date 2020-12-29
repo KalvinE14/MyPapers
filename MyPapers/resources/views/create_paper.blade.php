@@ -4,11 +4,9 @@
 
 @section('content')
 
-    <center>
-
-        <head>
+    <head>
             <link rel="stylesheet" type="text/css" href="{{asset('css/create.css')}}">
-            </head>
+    </head>
 
     <h1>Create Paper</h1>
 
@@ -24,11 +22,11 @@
             </div>
 
             <div class="form-group">
-                    <label for="type">Types :</label>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" name="type" id="type" placeholder="Simple, Elegant, etc">
-                    @error('type')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <label for="type">Types :</label>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" name="type" id="type" placeholder="Simple, Elegant, etc">
+                @error('type')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="form-group">

@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function(){
-    return view('template/home_template');
+    return view('home/home_user');
 });
 
 Route::get('/signup', 'UserController@showSignUp');
