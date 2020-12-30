@@ -155,9 +155,12 @@
     <div class="container" style="display: block">
         @yield('content')
     </div>
-    
-    <div class="container mb-5 mt-5">
-        <div class="container" style="text-align: center">
+
+    <div class="container mb-5" style="margin-top: 160px">
+        <div class="container">
+            <hr style="border-top: 1px solid white">
+        </div>
+        <div class="container mt-3" style="text-align: center">
             <a href="#"><img src="/assets/facebook_logos_PNG19751.png" alt="" style="width: 50px; height: 35px"></a>
             <a href="#"><img src="/assets/twitter.png" alt="" style="width: 50px; height: 50px"></a>
             <a href="#"><img src="/assets/instagram.png" alt="" style="width: 40px; height: 40px"></a>

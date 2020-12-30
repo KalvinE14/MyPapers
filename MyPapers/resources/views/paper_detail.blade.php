@@ -4,7 +4,7 @@
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-2">
-                <img src="assets/previewpaper1.png" alt="" width="200px">
+                <img src="{{url('assets/previewpaper1.png')}}" alt="" width="200px">
             </div>
             <div class="col-5" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
                 <h2>JANE DOE'S CURRICULUM VITAE</h2>
@@ -52,7 +52,7 @@
                     @if ($x % 2 == 0)
                         <div class="row">
                             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                                <img class="ml-5" src="assets/profilepicture.png" alt="" width="150px">
+                                <img class="ml-5" src="{{url('assets/profilepicture.png')}}" alt="" width="150px">
                                 Vanessa Smith
                             </div>
                             <div class="col-10 mt-3" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
@@ -70,7 +70,7 @@
                                 Sun, 20 February 2020; 21:45
                             </div>
                             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                                <img class="ml-5" src="assets/profilepicture2.png" alt="" width="150px">
+                                <img class="ml-5" src="{{url('assets/profilepicture2.png')}}" alt="" width="150px">
                                 John Doe
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                     @if ($x % 2 == 0)
                         <div class="row">
                             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                                <img class="ml-5" src="assets/profilepicture.png" alt="" width="150px">
+                                <img class="ml-5" src="{{url('assets/profilepicture.png')}}" alt="" width="150px">
                                 Vanessa Smith
                             </div>
                             <div class="col-10 mt-3" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
@@ -99,7 +99,7 @@
                                 Sun, 20 February 2020; 21:45
                             </div>
                             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                                <img class="ml-5" src="assets/profilepicture2.png" alt="" width="150px">
+                                <img class="ml-5" src="{{url('assets/profilepicture2.png')}}" alt="" width="150px">
                                 John Doe
                             </div>
                         </div>
@@ -118,7 +118,7 @@
     <div class="container">
         <div class="row">
             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                <img class="ml-5" src="assets/profilepicture2.png" alt="" width="150px"  style="round-shadow: 10px 8px 8px 5px rgba(0, 0, 0, 0.2);">
+                <img class="ml-5" src="{{url('assets/profilepicture2.png')}}" alt="" width="150px"  style="round-shadow: 10px 8px 8px 5px rgba(0, 0, 0, 0.2);">
                 <h6 class="mt-2">John Doe</h6>
             </div>
             <div class="col-10">
@@ -131,8 +131,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <hr style="border-top: 1px solid white">
     </div>
 @endsection

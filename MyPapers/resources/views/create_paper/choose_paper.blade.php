@@ -25,4 +25,5 @@
             <button style="margin-bottom: 10px;" type="submit" class="btn btn-danger" style="border-radius: 15px; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; color: white;width: 100px;">Create Leaflet</button>
         </div>
     </div>
+    
 @endsection
