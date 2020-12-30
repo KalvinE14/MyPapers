@@ -21,6 +21,10 @@ Route::get('/detail', function(){
     return view('paper_detail');
 });
 
+Route::get('/choose_paper', function(){
+    return view('create_paper/choose_paper');
+});
+
 Route::get('/signup', 'UserController@showSignUp');
 Route::post('/signup', 'UserController@doSignUp')->name('register');
 Route::get('/login_menu', 'UserController@showLoginMenu')->name('login_menu');

@@ -34,7 +34,7 @@ class PaperController extends Controller
 
     public function insertPaperData()
     {
-        return view('create_paper');
+        return view('create_paper.create_paper');
     }
 
     public function showPaperDetail($paper_id, $user_id){
@@ -53,7 +53,7 @@ class PaperController extends Controller
         ]);
 
         if($validator->fails()){
-            return view('create_paper')->withErrors($validator->errors());
+            return redirect()->route('create_paper')->withErrors($validator->errors());
         }
 
         Paper::create([
