@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('before_login_home');
 });
 
-Route::get('/home', function(){
-    return view('home/home_user');
+Route::get('/detail', function(){
+    return view('paper_detail');
 });
 
 Route::get('/signup', 'UserController@showSignUp');

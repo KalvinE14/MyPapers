@@ -139,8 +139,6 @@
                 <div class="row ml-auto align-self-center">
                     <div class="col">
                         @yield('notification')
-                        
-
                     </div>
                     <div class="col mt-3">
                         <a class="nav-item nav-link" href="#" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">Username</a>
@@ -158,7 +156,7 @@
         @yield('content')
     </div>
     
-    <div class="container">
+    <div class="container mb-5 mt-5">
         <div class="container" style="text-align: center">
             <a href="#"><img src="/assets/facebook_logos_PNG19751.png" alt="" style="width: 50px; height: 35px"></a>
             <a href="#"><img src="/assets/twitter.png" alt="" style="width: 50px; height: 50px"></a>
