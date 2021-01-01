@@ -32,11 +32,6 @@ class PaperController extends Controller
         return view('paper', ['papers' => $papers]);
     }
 
-    public function insertPaperData()
-    {
-        return view('create_paper.create_paper');
-    }
-
     public function showPaperDetail($paper_id, $user_id){
         $papers = Paper::where('user_id', $user_id)->where('paper_id', $paper_id)->first();
         return view('paper_detail', ['papers' => $papers]);
@@ -53,31 +48,68 @@ class PaperController extends Controller
         ]);
 
         if($validator->fails()){
-            return redirect()->route('create_paper')->withErrors($validator->errors());
+            return redirect()->back()->withErrors($validator->errors());
         }
 
-        Paper::create([
-            'title' => $request->title,
-            'type' => $request->type,
-            'requirement' => $request->requirement,
-            'description' => $request->description,
-            'status' => "Pending",
-            'file' => $request->file('image')->getClientOriginalName(),
-            'preview' => null,
-            'user_id' => 1
-        ]);
-        
-        $image = $request->file('image');
-        $name = $request->file('image')->getClientOriginalName();
-        
-        $image->move(public_path("assets"), $name);
+        if($request->file('image') != null)
+        {
+            Paper::create([
+                'title' => $request->title,
+                'type' => $request->type,
+                'requirement' => $request->requirement,
+                'description' => $request->description,
+                'status' => "Pending",
+                'file' => $request->file('image')->getClientOriginalName(),
+                'preview' => null,
+                'user_id' => 1,
+                'expert_id'=> null
+            ]);
+
+            $image = $request->file('image');
+
+            $name = $request->file('image')->getClientOriginalName();
+            $image->move(public_path("assets"), $name);
+        }else
+        {
+            Paper::create([
+                'title' => $request->title,
+                'type' => $request->type,
+                'requirement' => $request->requirement,
+                'description' => $request->description,
+                'status' => "Pending",
+                'file' => null,
+                'preview' => null,
+                'user_id' => 1,
+                'expert_id'=> null
+            ]);
+        }
 
         return redirect('/papers')->with('status', 'Paper has been created!');
+    }
+
+    public function createCv()
+    {
+        return view('create_paper.create_paper')->with('paper_type', 'Curriculum Vitae');
+    }
+
+    public function createBrochure()
+    {
+        return view('create_paper.create_paper')->with('paper_type', 'Brochure');
+    }
+
+    public function createLeaflet()
+    {
+        return view('create_paper.create_paper')->with('paper_type', 'Leaflet');
     }
 
     public function downloadPaper($preview){
         $file = public_path('assets/').$preview;
 
         return response()->download($file);
+    }
+
+    public function showHistory()
+    {
+        return view('history.paper_history');
     }
 }
