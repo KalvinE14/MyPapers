@@ -71,4 +71,9 @@ class UserController extends Controller
     {
         return view('login.login_admin');
     }
+
+    public function showAllUser()
+    {
+        return view ('all_user.all_user');
+    }
 }

@@ -3,9 +3,13 @@
 @section('title', "Create " . $paper_type)
 
 @section('content')
-    <div class="container" style="border: 5px solid white;width: 500px;margin-top: 40px;">
-        <div style="text-align: center;margin-bottom: 40px;margin-top: 20px;">
-            <h1 style="color: white;">Create {{ $paper_type }} </h1>
+    <div class="container" style="background-color: #33415c; border-radius: 45px;width: 500px;margin-top: 40px;">
+        <div style="text-align: center;margin-bottom: 20px;margin-top: 20px; padding-top: 20px;padding-left: 10px;padding-right: 10px;">
+            <h2 style="color: white;">Create {{ $paper_type }} </h2>
+        </div>
+
+        <div style="padding-left: 10px;padding-right: 10px;">
+            <hr style="background-color: white;">
         </div>
             
         <form action="/paper" method="post" enctype="multipart/form-data">
@@ -52,8 +56,8 @@
                     </div>
                 </div>
 
-                <div class="form-group" style="width: 50%;margin: auto;text-align: center; margin-bottom: 30px;">
-                    <button class="btn btn-danger" style="border-radius: 15px; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; color: white;width: 200px;" type="submit" name="insert">Submit and Pay</button>
+                <div class="form-group" style="width: 50%;margin: auto;text-align: center; margin-bottom: 30px;padding-bottom: 30px;padding-top: 20px;">
+                    <button class="btn btn-danger" style="border-radius: 50px; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 500; color: white;width: 200px;" type="submit" name="insert">Submit and Pay</button>
                 </div>
         </form>
     </div>

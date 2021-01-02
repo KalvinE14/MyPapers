@@ -9,17 +9,21 @@
     </div>
 
     @for($i = 0; $i < 3; $i++)
-        <div class="container" style="margin-bottom: 50px;width: 750px; border: 5px solid white; padding: 0px 0px;">
-            <div class="container" style="border-bottom: 5px solid white; width: auto;height: 50px;">
+        <div class="container" style="border-radius: 45px; margin-bottom: 50px;width: 750px; padding: 0px 0px; background-color: #33415c">
+            <div class="container" style="width: auto;height: 50px;">
                 <div class="row" style="height: 50px;">
-                    <div class="col-lg3" style="margin-top: auto;margin-bottom: auto; margin-left: 26px;">
+                    <div class="col-lg3" style="margin-top: 20px;margin-bottom: auto; margin-left: 26px;">
                         <h4 style="color: white;">Monday, 11 January 2021</h4>
                     </div>
                 </div>
             </div>
 
+            <div class="container" style="padding-left: 26px; padding-right: 26px;">
+                <hr style="background-color: white;">
+            </div>
+
             <div class="container">
-                <div class="row" style="padding-top: 40px;padding-bottom: 40px; padding-left: 40px;">
+                <div class="row" style="padding-top: 10px;padding-bottom: 10px; padding-left: 40px;">
                     <div class="col-lg3" style="width: auto;">
                         <img src="{{ url('assets/previewpaper1.png') }}" alt="result paper" width="200px" height="300px">
                     </div>
@@ -51,8 +55,12 @@
                 </div>
             </div>
 
-            <div class="container" style="border-top: 5px solid white; width: auto;height: 50px;margin-top: 0px;">
-                <div class="row" style="height: 50px;">
+            <div class="container" style="padding-left: 26px; padding-right: 26px;">
+                <hr style="background-color: white;">
+            </div>
+
+            <div class="container" style="width: auto;height: 50px;margin-top: 0px;">
+                <div class="row" style="height: 50px; padding-bottom: 10px;">
                     <div class="col-lg3" style="width: auto;margin-top: auto;margin-bottom: auto;margin-left: 26px;">
                         <h4 style="color: white;">Created by : Doni</h4>
                     </div>
