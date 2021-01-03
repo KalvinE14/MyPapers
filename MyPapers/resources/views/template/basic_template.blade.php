@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,7 +47,7 @@
 
         .notifications {
             width: 300px;
-            height:400px;
+            height: 400px;
             position: absolute;
             top: 100px;
             visibility: hidden;
@@ -98,39 +99,61 @@
             color: #aaa;
             font-size: 12px
         }
+
     </style>
 
     <title>@yield('title')</title>
 
-  </head>
-  <body style="background-color: #293241">
+</head>
+
+<body style="background-color: #293241">
 
     <script type="text/javascript">
         var down = false;
-        function notification(){
-            $('#bell').click(function(){
-                var color = $(this).text();
-                if(down){
-                    hideNotification();
-                    down = false;
-                }else{
-                    showNotification();
-                    down = true;
-                }
-            });
+
+        function notification() {
+            var color = $(this).text();
+            if (down) {
+                hideNotification();
+                down = false;
+            } else {
+                showNotification();
+                down = true;
+            }
         }
 
-        function hideNotification(){
+        function hideNotification() {
             $('#box').css('visibility', 'hidden');
         }
 
-        function showNotification(){
+        function showNotification() {
             $('#box').css('visibility', 'visible');
         }
+
+        function updateName() {
+            $('#updateName').css('display', 'block');
+        }
+
+        function updateAddress() {
+            $('#updateAddress').css('display', 'block');
+        }
+
+        function updatePassword() {
+            $('#changePass').css('display', 'block');
+        }
+
+        function updateProfilePicture() {
+            $('#changeProfilePicture').css('display', 'block');
+        }
+
+        function hireEmployee() {
+            $('#hireEmployee').css('display', 'block');
+        }
+
     </script>
 
     <div class="container-md mt-3">
-          <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
             <div class="container">
                 <a class="navbar-brand" href="#" style="margin-left: -20px">
                     <img src="/assets/Logo.png" alt="" class="d-inline-block align-center" style="width: 100px; height: 100px">
@@ -148,7 +171,7 @@
                     </div>
                 </div>
             </div>
-          </nav>
+        </nav>
     </div>
 
 
@@ -181,4 +204,5 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js'></script>
 </body>
+
 </html>
