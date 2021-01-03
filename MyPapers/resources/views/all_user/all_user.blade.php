@@ -9,21 +9,21 @@
     </div>
 
     <div class="row" style="padding-left: 30px;">
-    @for($i = 0; $i < 3; $i++)
+    @foreach($users as $user)
         <div class="col-lg3" style="background-color: #33415c; width: 380px; margin-right: 20px; margin-left: 20px; padding-top: 20px; padding-bottom: 20px;">
             <div id="header">
                 <div class="row" >
                     <div class="col-lg3" style="width: fit-content;">
-                        <img style="border-radius: 50%;" src="{{ url('assets/profilepicture.png') }}" alt="" width="105px" height="105px">
+                        <img style="border-radius: 50%;" src="{{ url('assets/' . $user->profile_picture) }}" alt="" width="105px" height="105px">
                     </div>
 
                     <div class="col-lg3" style="width: 230px; margin-right: 20px; word-wrap: break-word;margin-top: auto; margin-bottom: auto;">
                         <div>
-                            <h5 style="color: white;">Vanessa Smithaaaaa</h5>
+                            <h5 style="color: white;">{{ $user->name }}</h5>
                         </div>    
                     
                         <div style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                           <p style="font-weight: 100;">January 30th, 2020</p>
+                           <p style="font-weight: 100;">{{ $user->dob }}</p>
                         </div>
 
                         <div>
@@ -41,25 +41,25 @@
             <div class="container">
                 <div style="word-wrap: break-word;">
                     <h5 style="color: white;">Username</h5>
-                    <p style="font-weight: 100;color: white;">vanessasmith3</p>
+                    <p style="font-weight: 100;color: white;">{{ $user->username }}</p>
                 </div>
 
                 <div style="word-wrap: break-word;">
                     <h5 style="color: white;">Password</h5>
-                    <p style="font-weight: 100;color: white;">vanessasmith123</p>
+                    <p style="font-weight: 100;color: white;">{{ $user->password }}</p>
                 </div>
 
                 <div style="word-wrap: break-word;">
                     <h5 style="color: white;">Address</h5>
-                    <p style="font-weight: 100;color: white;">Sweet Water Street 33</p>
+                    <p style="font-weight: 100;color: white;">{{ $user->address }}</p>
                 </div>
 
                 <div style="word-wrap: break-word;">
                     <h5 style="color: white;">Gender</h5>
-                    <p style="font-weight: 100;color: white;">Female</p>
+                    <p style="font-weight: 100;color: white;">{{ $user->gender }}</p>
                 </div>
             </div>
         </div>
-    @endfor
+    @endforeach
     </div>
 @endsection

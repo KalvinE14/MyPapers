@@ -46,6 +46,16 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'expert' => [
+            'driver' => 'session',
+            'provider' => 'experts',
+        ]
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
     ],
 
     /*
@@ -71,10 +81,10 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'experts' => [
+            'driver' => 'eloquent',
+            'model' => App\Expert::class,
+        ]
     ],
 
     /*
@@ -98,6 +108,12 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+
+        'experts' => [
+            'provider' => 'experts',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
     ],
 

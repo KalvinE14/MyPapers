@@ -7,6 +7,7 @@ use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class PaperController extends Controller
 {
@@ -89,17 +90,47 @@ class PaperController extends Controller
 
     public function createCv()
     {
-        return view('create_paper.create_paper')->with('paper_type', 'Curriculum Vitae');
+        if(Session::get('username') != null)
+        {
+            if(Session::get('role') == "User")
+            {
+                return view('create_paper.create_paper')->with('paper_type', 'Curriculum Vitae');
+            }
+
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
     }
 
     public function createBrochure()
     {
-        return view('create_paper.create_paper')->with('paper_type', 'Brochure');
+        if(Session::get('username') != null)
+        {
+            if(Session::get('role') == "User")
+            {
+                return view('create_paper.create_paper')->with('paper_type', 'Brochure');
+            }
+
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
     }
 
     public function createLeaflet()
     {
-        return view('create_paper.create_paper')->with('paper_type', 'Leaflet');
+        if(Session::get('username') != null)
+        {
+            if(Session::get('role') == "User")
+            {
+                return view('create_paper.create_paper')->with('paper_type', 'Leaflet');
+            }
+
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
     }
 
     public function downloadPaper($preview){
@@ -110,6 +141,34 @@ class PaperController extends Controller
 
     public function showHistory()
     {
-        return view('history.paper_history');
+        if(Session::get('username') != null)
+        {
+            if(Session::get('role') == "User")
+            {
+                $papers = Paper::join('experts', 'papers.expert_id', '=', 'experts.expert_id')->where('user_id', Session::get('user_id'))->where('status', 'LIKE', 'Finished')->get();
+
+                return view('history.paper_history', ['papers' => $papers]);
+            }
+
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
+        
+    }
+
+    public function choosePaper()
+    {
+        if(Session::get('username') != null)
+        {
+            if(Session::get('role') == "User")
+            {
+                return view('create_paper.choose_paper');
+            }
+
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
     }
 }

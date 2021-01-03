@@ -21,18 +21,29 @@ Route::get('/detail', function(){
     return view('paper_detail');
 });
 
+Route::get('/update', function(){
+    return view('update_profile');
+});
+
+Route::get('/all_expert', function(){
+    return view('all_expert/all_expert');
+});
+
+Route::get('/all_paper', function(){
+    return view('all_paper/all_paper');
+});
+
 Route::get('/choose_paper', function(){
     return view('create_paper/choose_paper');
 });
 
-Route::get('/signup', 'UserController@showSignUp')->name('register_page');
+Route::get('/signup', 'UserController@showSignUp');
 Route::post('/signup', 'UserController@doSignUp')->name('register');
 Route::get('/login_menu', 'UserController@showLoginMenu')->name('login_menu');
 Route::get('/login_user', 'UserController@showLoginUser')->name('login_user');
 Route::get('/login_expert', 'UserController@showLoginExpert')->name('login_expert');
 Route::get('/login_admin', 'UserController@showLoginAdmin')->name('login_admin');
 Route::post('/login', 'UserController@doLogin')->name('login');
-Route::get('/all_user', 'UserController@showAllUser')->name('view_all_user');
 
 Route::get('/papers', 'PaperController@showAllPaperData')->name('papers');
 Route::get('/papers/{userId}', 'PaperController@showAllUserPaper')->name('papers_user');

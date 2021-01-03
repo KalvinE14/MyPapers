@@ -12,7 +12,7 @@
             <hr style="background-color: white;">
         </div>
             
-        <form action="/paper" method="post" enctype="multipart/form-data">
+        <form action="{{ route('create_paper') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="type" id="type" value="{{ $paper_type }}">
                 <div id="title" style="margin-top: 50px;margin-bottom: 30px;">

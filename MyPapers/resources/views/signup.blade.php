@@ -72,7 +72,7 @@
 			</div>
 
 			@if($errors->any())
-				<p style="color: yellow;">{{$errors->first()}}</p>
+				<p style="color: red;">{{$errors->first()}}</p>
 			@endif
 		</form>
     </div>
