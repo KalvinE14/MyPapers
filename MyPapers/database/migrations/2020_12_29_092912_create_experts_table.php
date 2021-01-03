@@ -22,7 +22,6 @@ class CreateExpertsTable extends Migration
             $table->string('address');
             $table->string('dob');
             $table->string('gender');
-            $table->double('rating');
             $table->string('profile_picture');
             $table->rememberToken();
             $table->timestamps();

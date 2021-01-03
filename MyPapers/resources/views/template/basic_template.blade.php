@@ -47,7 +47,7 @@
 
         .notifications {
             width: 300px;
-            height: 400px;
+            height: auto;
             position: absolute;
             top: 100px;
             visibility: hidden;
@@ -155,34 +155,40 @@
     <div class="container-md mt-3">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
             <div class="container">
-                <a class="navbar-brand" href="#" style="margin-left: -20px">
+                @if(strcmp(Session::get('role'), 'User') == 0)
+                <a class="navbar-brand" href="{{ route('home_user') }}" style="margin-left: -20px">
+                @elseif(strcmp(Session::get('role'), 'Expert') == 0)
+                <a class="navbar-brand" href="{{ route('home_expert') }}" style="margin-left: -20px">
+                @else
+                <a class="navbar-brand" href="{{ route('home_admin') }}" style="margin-left: -20px">
+                @endif
                     <img src="/assets/Logo.png" alt="" class="d-inline-block align-center" style="width: 100px; height: 100px">
                     <h3 class="d-inline-block" style="margin-left: -10px; font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px">MyPapers</h3>
                 </a>
+                
+                
                 <div class="row ml-auto align-self-center">
+                    @if(strcmp(Session::get('role'), 'User') == 0)
                     <div class="col">
-                        <div class="icon" id="bell"><a href="#" onclick="notification()"><img src="https://i.imgur.com/AC7dgLA.png" alt=""></a></div>
+                        <div class="icon" id="bell"><img onclick="notification()" src="https://i.imgur.com/AC7dgLA.png" alt=""></div>
                         <div class="notifications mt-1" id="box">
-                            <h2>Notifications - <span>2</span></h2>
-                            <div class="notifications-item"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
+                            <h2>Notifications - <span>{{ $totalNotification }}</span></h2>
+                            @foreach($notifications as $notification)
+                            <div class="notifications-item"> <img src="{{ url('assets/' . $notification->profile_picture) }}" alt="img">
                                 <div class="text">
-                                    <h4>Samso aliao</h4>
-                                    <p>Samso Nagaro Like your home work</p>
+                                    <h4>{{ $notification->name }}</h4>
+                                    <p>{{ $notification->message }}</p>
                                 </div>
                             </div>
-                            <div class="notifications-item"> <img src="https://img.icons8.com/flat_round/64/000000/vote-badge.png" alt="img">
-                                <div class="text">
-                                    <h4>John Silvester</h4>
-                                    <p>+20 vista badge earned</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
+                    @endif
                     <div class="col mt-3">
-                        <a class="nav-item nav-link" href="#" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">Username</a>
+                        <p class="nav-item nav-link" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</p>
                     </div>
                     <div class="col mt-3">
-                        <a class="nav-item nav-link" href="#" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">Logout</a>
+                        <a class="nav-item nav-link" href="{{ route('user_logout') }}" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">Logout</a>
                     </div>
                 </div>
             </div>
@@ -199,9 +205,9 @@
             <hr style="border-top: 1px solid white">
         </div>
         <div class="container mt-3" style="text-align: center">
-            <a href="#"><img src="/assets/facebook_logos_PNG19751.png" alt="" style="width: 50px; height: 35px"></a>
-            <a href="#"><img src="/assets/twitter.png" alt="" style="width: 50px; height: 50px"></a>
-            <a href="#"><img src="/assets/instagram.png" alt="" style="width: 40px; height: 40px"></a>
+            <a href="https://www.facebook.com"><img src="/assets/facebook_logos_PNG19751.png" alt="" style="width: 50px; height: 35px"></a>
+            <a href="https://www.twitter.com"><img src="/assets/twitter.png" alt="" style="width: 50px; height: 50px"></a>
+            <a href="https://www.instagram.com"><img src="/assets/instagram.png" alt="" style="width: 40px; height: 40px"></a>
         </div>
         <div class="container mt-2" style="text-align: center">
             <h6 style="font-size: 14px; font-weight: 500; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 1px;">Copyright &copy; 2020 MyPapers. All Rights Reserved</h6>

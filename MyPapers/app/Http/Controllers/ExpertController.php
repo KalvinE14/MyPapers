@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Expert;
+use App\Paper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -24,9 +25,17 @@ class ExpertController extends Controller
     {
         if(Session::get('username') != null)
         {
+            $expert_id = Session::get('expert_id');
+
             if(strcmp(Session::get('role'), "Expert") == 0)
             {
-                return view('home.home_expert');
+                $upcomingPapers = Paper::join('users', 'papers.user_id', '=', 'users.user_id')->where('expert_id', '=', $expert_id)->
+                            where('status', 'LIKE', 'Pending')->get();
+                
+                $availablePapers = Paper::join('users', 'papers.user_id', '=', 'users.user_id')->
+                            where('status', 'LIKE', 'Waiting')->get();
+
+                return view('home.home_expert')->with('upcomingPapers', $upcomingPapers)->with('availablePapers', $availablePapers);
             }
             
             return redirect()->back();

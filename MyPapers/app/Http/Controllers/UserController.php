@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use Illuminate\Http\Request;
 use App\User;
+use App\Paper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -126,9 +128,24 @@ class UserController extends Controller
     {
         if(Session::get('username') != null)
         {
+            $user_id = Session::get('user_id');
+
             if(strcmp(Session::get('role'), "User") == 0)
             {
-                return view('home.home_user');
+                $waitingPapers = Paper::join('experts', 'papers.expert_id', '=', 'experts.expert_id')->where('user_id', '=', $user_id)->
+                            where('status', 'LIKE', 'Pending')->get();
+
+                $pendingPapers = Paper::where('user_id', '=', $user_id)->
+                            where('status', 'LIKE', 'Waiting')->get();
+
+                $notifications = Notification::join('papers', 'notifications.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    where('papers.user_id', '=', $user_id)->get();
+                
+                $totalNotification = count($notifications);
+
+                return view('home.home_user')->with('waitingPapers', $waitingPapers)->with('pendingPapers', $pendingPapers)
+                        ->with('notifications', $notifications)->with('totalNotification', $totalNotification);
             }
             
             return redirect()->back();
@@ -188,10 +205,6 @@ class UserController extends Controller
                 }
 
                 $user = User::where('user_id', 'LIKE', $user_id)->get();
-
-                // dump(count($totalCv));
-                // dump(count($totalBrochure));
-                // dump(count($totalLeaflet));
 
                 return view('update_profile', ['user' => $user])
                     ->with('totalCv', count($totalCv))->with('totalBrochure', count($totalBrochure))
@@ -288,5 +301,14 @@ class UserController extends Controller
         ]);
 
         return redirect()->back(); 
+    }
+
+    public function logout()
+    {
+        Session::forget('username');
+        Session::forget('role');
+        Session::forget('user_id');
+
+        return redirect()->route('start_page');
     }
 }

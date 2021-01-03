@@ -19,32 +19,25 @@ Route::get('/detail', function(){
     return view('paper_detail');
 });
 
-Route::get('/home_user', function(){
-    return view('home/home_user');
-});
-
-Route::get('/home_expert', function(){
-    return view('home/home_expert');
-});
-
 Route::get('/signup/user', 'UserController@showSignUp')->name('register_page');
 Route::post('/signup/user', 'UserController@doSignUp')->name('register_user');
 Route::get('/login/menu', 'UserController@showLoginMenu')->name('login_menu');
 Route::get('/login/user', 'UserController@showLoginUser')->name('login_user_page');
 Route::post('/login/user', 'UserController@doLoginUser')->name('login_user');
 Route::get('/user/all', 'UserController@showAllUser')->name('view_all_user');
-Route::get('/home/user', 'UserController@showHomeUser')->name('home_user');
+Route::get('/user/home', 'UserController@showHomeUser')->name('home_user');
 Route::post('/user/remove/{user_id}', 'UserController@removeUser')->name('remove_user');
 Route::get('/user/profile', 'UserController@showProfile')->name('profile_user');
 Route::post('/user/update/name/{user_id}', 'UserController@updateName')->name('update_user_name');
 Route::post('/user/update/address/{user_id}', 'UserController@updateAddress')->name('update_user_address');
 Route::post('/user/update/password/{user_id}', 'UserController@updatePassword')->name('update_user_password');
 Route::post('/user/update/picture/{user_id}', 'UserController@updatePicture')->name('update_user_picture');
+Route::get('/user/logout', 'UserController@logout')->name('user_logout');
 
 Route::post('/signup/expert', 'ExpertController@doSignUp')->name('register_expert');
 Route::get('/login/expert', 'ExpertController@showLoginExpert')->name('login_expert_page');
 Route::post('/login/expert', 'ExpertController@doLoginExpert')->name('login_expert');
-Route::get('/home/expert', 'ExpertController@showHomeExpert')->name('home_expert');
+Route::get('/expert/home', 'ExpertController@showHomeExpert')->name('home_expert');
 Route::get('/expert/all', 'ExpertController@showAllExpert')->name('view_all_expert');
 Route::post('/expert/remove/{expert_id}', 'ExpertController@removeExpert')->name('remove_expert');
 Route::get('/expert/profile', 'ExpertController@showProfile')->name('profile_expert');
@@ -65,6 +58,8 @@ Route::get('/paper/create_leaflet', 'PaperController@createLeaflet')->name('crea
 Route::post('/paper/create', 'PaperController@store')->name('create_paper');
 Route::get('/paper/paper_detail/{paper_id}/{user_id}', 'PaperController@showPaperDetail');
 Route::get('/paper/history', 'PaperController@showHistory')->name('paper_history');
+Route::get('/paper/accept/{paper_id}', 'PaperController@acceptOrder')->name('accept_order');
+Route::get('/paper/cancel/{paper_id}', 'PaperController@deletePaper')->name('cancel_order');
 
 Route::get('/download/{preview}', 'PaperController@downloadPaper')->name('download_paper');
 

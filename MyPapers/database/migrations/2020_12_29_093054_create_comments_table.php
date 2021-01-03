@@ -15,10 +15,8 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id('comment_id');
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable();
-            $table->foreign('expert_id')->references('expert_id')->on('experts')->onDelete('cascade');
-            $table->foreignId('expert_id')->nullable();
+            $table->boolean('user_comment');
+            $table->boolean('expert_comment');
             $table->foreign('paper_id')->references('paper_id')->on('papers')->onDelete('cascade');
             $table->foreignId('paper_id')->nullable();
             $table->string('comment');

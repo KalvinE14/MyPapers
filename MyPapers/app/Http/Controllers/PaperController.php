@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notification;
 use App\Paper;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
@@ -162,6 +163,11 @@ class PaperController extends Controller
                 $papers = Paper::join('experts', 'papers.expert_id', '=', 'experts.expert_id')->where('user_id', Session::get('user_id'))->where('status', 'LIKE', 'Finished')->get();
 
                 return view('history.paper_history', ['papers' => $papers]);
+            }else if(strcmp(Session::get('role'), "Expert") == 0)
+            {
+                $papers = Paper::join('users', 'papers.user_id', '=', 'users.user_id')->where('expert_id', Session::get('expert_id'))->where('status', 'LIKE', 'Finished')->get();
+
+                return view('history.paper_history', ['papers' => $papers]);
             }
 
             return redirect()->back();
@@ -184,5 +190,35 @@ class PaperController extends Controller
         }
 
         return redirect()->route('start_page');
+    }
+
+    public function acceptOrder($id)
+    {
+        if(Session::get('username') != null)
+        {
+            if(strcmp(Session::get('role'), "Expert") == 0)
+            {
+                Paper::where('paper_id', '=', $id)->update([
+                    'status' => 'Pending',
+                    'expert_id' => Session::get('expert_id'),
+                ]);
+        
+                Notification::create([
+                    'paper_id' => $id, 
+                    'message' => "Requested paper have been accepted", 
+                ]);
+            }
+
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
+    }
+
+    public function deletePaper($id)
+    {
+        Paper::where('paper_id', '=', $id)->delete();
+
+        return redirect()->back(); 
     }
 }

@@ -62,7 +62,12 @@
             <div class="container" style="width: auto;height: 50px;margin-top: 0px;">
                 <div class="row" style="height: 50px; padding-bottom: 10px;">
                     <div class="col-lg3" style="width: auto;margin-top: auto;margin-bottom: auto;margin-left: 26px;">
+                        @if(strcmp(Session::get('role'), 'User') == 0)
                         <h4 style="color: white;">Created by : {{ $paper->name }}</h4>
+                        @else
+                        <h4 style="color: white;">Requested by : {{ $paper->name }}</h4>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
