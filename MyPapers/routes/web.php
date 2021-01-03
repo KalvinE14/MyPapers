@@ -19,6 +19,14 @@ Route::get('/detail', function(){
     return view('paper_detail');
 });
 
+Route::get('/home_user', function(){
+    return view('home/home_user');
+});
+
+Route::get('/home_expert', function(){
+    return view('home/home_expert');
+});
+
 Route::get('/signup/user', 'UserController@showSignUp')->name('register_page');
 Route::post('/signup/user', 'UserController@doSignUp')->name('register_user');
 Route::get('/login/menu', 'UserController@showLoginMenu')->name('login_menu');
