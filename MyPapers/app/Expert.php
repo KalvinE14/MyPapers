@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Expert extends Model
 {
     protected $fillable = [
-        'name', 'username', 'password', 'address', 'dob', 'gender'
+        'name', 'username', 'password', 'address', 'dob', 'gender', 'profile_picture', 'rating'
     ];
 }

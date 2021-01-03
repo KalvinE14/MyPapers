@@ -13,8 +13,22 @@ class PaperController extends Controller
 {
     public function showAllPaperData()
     {
-        $papers = Paper::all();
-        return view('paper', ['papers' => $papers]);
+        if(Session::get('username') != null)
+        {
+            if(strcmp(Session::get('role'), "Admin") == 0)
+            {
+                $papers = Paper::select('paper_id', 'title', 'requirement', 'description', 'type', 'status', 'preview', 'users.name as userName', 'experts.name as expertName', 'papers.created_at', 'users.profile_picture as userPicture', 'experts.profile_picture as expertPicture')->
+                            join('experts', 'papers.expert_id', '=', 'experts.expert_id')->
+                            join('users', 'papers.user_id', '=', 'users.user_id')->
+                            get();
+                
+                return view('all_paper.all_paper', ['papers' => $papers]);
+            }
+            
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
     }
 
     public function showAllUserPaper($userId)
@@ -92,7 +106,7 @@ class PaperController extends Controller
     {
         if(Session::get('username') != null)
         {
-            if(Session::get('role') == "User")
+            if(strcmp(Session::get('role'), "User") == 0)
             {
                 return view('create_paper.create_paper')->with('paper_type', 'Curriculum Vitae');
             }
@@ -107,7 +121,7 @@ class PaperController extends Controller
     {
         if(Session::get('username') != null)
         {
-            if(Session::get('role') == "User")
+            if(strcmp(Session::get('role'), "User") == 0)
             {
                 return view('create_paper.create_paper')->with('paper_type', 'Brochure');
             }
@@ -122,7 +136,7 @@ class PaperController extends Controller
     {
         if(Session::get('username') != null)
         {
-            if(Session::get('role') == "User")
+            if(strcmp(Session::get('role'), "User") == 0)
             {
                 return view('create_paper.create_paper')->with('paper_type', 'Leaflet');
             }
@@ -143,7 +157,7 @@ class PaperController extends Controller
     {
         if(Session::get('username') != null)
         {
-            if(Session::get('role') == "User")
+            if(strcmp(Session::get('role'), "User") == 0)
             {
                 $papers = Paper::join('experts', 'papers.expert_id', '=', 'experts.expert_id')->where('user_id', Session::get('user_id'))->where('status', 'LIKE', 'Finished')->get();
 
@@ -161,7 +175,7 @@ class PaperController extends Controller
     {
         if(Session::get('username') != null)
         {
-            if(Session::get('role') == "User")
+            if(strcmp(Session::get('role'), "User") == 0)
             {
                 return view('create_paper.choose_paper');
             }

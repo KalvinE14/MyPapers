@@ -22,6 +22,11 @@ class UserController extends Controller
     }
 
     public function showSignUp(){
+        if(Session::get('username') != null)
+        {
+            return redirect()->back();
+        }
+
         return view('signup');
     }
 
@@ -31,6 +36,7 @@ class UserController extends Controller
             'username' => 'required|unique:users,username',
             'password' => 'required',
             'dob' => 'required',
+            'address' => 'required',
             'gender' => 'required'
         ]);
         
@@ -102,11 +108,9 @@ class UserController extends Controller
 
     public function showAllUser()
     {
-        $users = User::all();
-
         if(Session::get('username') != null)
         {
-            if(Session::get('role') == "Admin")
+            if(strcmp(Session::get('role'), "Admin") == 0)
             {
                 $users = User::all();
                 return view('all_user.all_user', ['users' => $users]);
@@ -122,7 +126,7 @@ class UserController extends Controller
     {
         if(Session::get('username') != null)
         {
-            if(Session::get('role') == "User")
+            if(strcmp(Session::get('role'), "User") == 0)
             {
                 return view('home.home_user');
             }
@@ -131,5 +135,158 @@ class UserController extends Controller
         }
 
         return redirect()->route('start_page');
+    }
+
+    public function removeUser($id)
+    {
+        if(Session::get('username'))
+        {
+            $role = Session::get('role');
+
+            if(strcmp($role, "Admin") == 0)
+            {
+                User::where('user_id', '=', $id)->delete();
+            }
+            
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
+    }
+
+    public function showProfile()
+    {
+        if(Session::get('username'))
+        {
+            $role = Session::get('role');
+            $user_id = Session::get('user_id');
+
+            if(strcmp($role, "User") == 0)
+            {
+                $totalCv = User::join('papers', 'users.user_id', '=', 'papers.user_id')->
+                            where('type', 'LIKE', 'Curriculum Vitae')->where('status', 'LIKE', 'Finished')->
+                            where('papers.user_id', '=', $user_id)->get();
+                $totalBrochure = User::join('papers', 'users.user_id', '=', 'papers.user_id')->
+                            where('type', 'LIKE', 'Brochure')->where('status', 'LIKE', 'Finished')->
+                            where('papers.user_id', '=', $user_id)->get();
+                $totalLeaflet = User::join('papers', 'users.user_id', '=', 'papers.user_id')->
+                            where('type', 'LIKE', 'Leaflet')->where('status', 'LIKE', 'Finished')->
+                            where('papers.user_id', '=', $user_id)->get();
+
+                $totalPaper = count($totalCv) + count($totalBrochure) + count($totalLeaflet);
+
+                if($totalPaper != 0)
+                {
+                    $cvPercentage = (count($totalCv) / $totalPaper) * 100;
+                    $brochurePercentage = (count($totalBrochure) / $totalPaper) * 100;
+                    $leafletPercentage = (count($totalLeaflet) / $totalPaper) * 100;
+                }else
+                {
+                    $cvPercentage = 0;
+                    $brochurePercentage = 0;
+                    $leafletPercentage = 0;
+                }
+
+                $user = User::where('user_id', 'LIKE', $user_id)->get();
+
+                // dump(count($totalCv));
+                // dump(count($totalBrochure));
+                // dump(count($totalLeaflet));
+
+                return view('update_profile', ['user' => $user])
+                    ->with('totalCv', count($totalCv))->with('totalBrochure', count($totalBrochure))
+                    ->with('totalLeaflet', count($totalLeaflet))
+                    ->with('cvPercentage', $cvPercentage)->with('brochurePercentage', $brochurePercentage)
+                    ->with('leafletPercentage', $leafletPercentage);
+            }
+            
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
+    }
+
+    public function updateName(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        User::where('user_id', '=', $id)->update([
+            'name' => $request->name
+        ]);
+
+        return redirect()->back(); 
+    }
+
+    public function updateAddress(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'address' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        User::where('user_id', '=', $id)->update([
+            'address' => $request->address
+        ]);
+
+        return redirect()->back(); 
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $old_password = $request->input('old_password');
+
+        $validator = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+        else{
+            $user = User::where('user_id', '=', $id)->first();
+
+            if(Hash::check($old_password, $user->password))
+            {
+                $temp_password = Hash::make($request->new_password);
+
+                User::where('expert_id', '=', $id)->update([
+                    'password' => $temp_password
+                ]);
+    
+                return redirect()->back();
+            }else
+            {
+                $validator->getMessageBag()->add('errorPassword', 'The password is wrong');
+                return redirect()->back()->withErrors($validator->errors());
+            }
+        }
+    }
+
+    public function updatePicture(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'profile_picture' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        User::where('user_id', '=', $id)->update([
+            'profile_picture' => $request->profile_picture
+        ]);
+
+        return redirect()->back(); 
     }
 }

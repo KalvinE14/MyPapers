@@ -7,7 +7,7 @@
     </div> 
     
 	<div class="container" style="width: 100%; padding-right: 1000px; margin-bottom: 10px;">
-		<form action="{{ route('register') }}" method="post">
+		<form action="{{ route('register_user') }}" method="post">
 			{{csrf_field()}}
 			<div class="row" style="width: auto; height: auto;">
 				<div class="col-lg-3" style="width: auto;">

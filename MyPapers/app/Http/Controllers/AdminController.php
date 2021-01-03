@@ -24,7 +24,7 @@ class AdminController extends Controller
     {
         if(Session::get('username') != null)
         {
-            if(Session::get('role') == "Admin")
+            if(strcmp(Session::get('role'), "Admin") == 0)
             {
                 return view('home.home_admin');
             }
@@ -55,7 +55,7 @@ class AdminController extends Controller
             {
                 Session::put('username', $admin->username);
                 Session::put('role', 'Admin');
-                Session::put('user_id', $admin->admin_id);
+                Session::put('admin_id', $admin->admin_id);
     
                 return redirect()->route('home_admin');
             }else
