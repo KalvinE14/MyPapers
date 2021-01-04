@@ -9,7 +9,7 @@
         @foreach($user as $u)
         <div class="row mt-4">
             <div class="col-md-2">
-                <img src="{{ url('assets/' . $u->profile_picture) }}" alt="" width="190px" style="position: absolute">
+                <img src="{{ url('assets/' . $u->profile_picture) }}" alt="" width="190px" style="border-radius: 50%; position: absolute">
                 <a href="#" onclick="updateProfilePicture()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus-circle-fill" viewBox="0 0 16 16" style="position: relative; margin-top: 145px; margin-left: 140px; border: 2px #33415c solid; border-radius: 100px">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -39,8 +39,14 @@
         <div class="container mt-4" id="changeProfilePicture" style="display: none; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
             <div class="col-8 mt-2 pt-3 pb-3" style="background:#33415c; border-radius: 15px; padding-left: 20px; padding-right: 20px">
                 <h5>New Profile Picture</h5>
-                <input class=" form-control" type="file" id="profilePicture">
-                <button type="submit" class="btn btn-danger">Submit</button>
+                <form action="{{ route('update_user_picture', $u->user_id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input name="profile_picture" class=" form-control" type="file" id="profilePicture">
+                    <button type="submit" class="btn btn-danger mt-3">Submit</button>
+                    @if($errors->any())
+                        <p style="color: red;">{{$errors->first()}}</p>
+                    @endif    
+                </form>
             </div>
         </div>
 
@@ -166,7 +172,7 @@
         @foreach($expert as $e)
         <div class="row mt-4">
             <div class="col-md-2">
-                <img src="{{ url('assets/' . $e->profile_picture) }}" alt="" width="190px" style="position: absolute">
+                <img src="{{ url('assets/' . $e->profile_picture) }}" alt="" width="190px" style="border-radius: 50%; position: absolute">
                 <a href="#" onclick="updateProfilePicture()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="white" class="bi bi-plus-circle-fill" viewBox="0 0 16 16" style="position: relative; margin-top: 145px; margin-left: 140px; border: 2px #33415c solid; border-radius: 100px">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
@@ -196,7 +202,14 @@
         <div class="container mt-4" id="changeProfilePicture" style="display: none; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
             <div class="col-8 mt-2 pt-3 pb-3" style="background:#33415c; border-radius: 15px; padding-left: 20px; padding-right: 20px">
                 <h5>New Profile Picture</h5>
-                <input class=" form-control" type="file" id="profilePicture">
+                <form action="{{ route('update_expert_picture', $e->expert_id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input name="profile_picture" class=" form-control" type="file" id="profilePicture">
+                    <button type="submit" class="btn btn-danger mt-3">Submit</button>
+                    @if($errors->any())
+                        <p style="color: red;">{{$errors->first()}}</p>
+                    @endif    
+                </form>
             </div>
         </div>
 

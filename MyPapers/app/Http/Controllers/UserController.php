@@ -295,7 +295,7 @@ class UserController extends Controller
     public function updatePicture(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'profile_picture' => 'required',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg',
         ]);
 
         if($validator->fails()){
@@ -303,10 +303,15 @@ class UserController extends Controller
         }
 
         User::where('user_id', '=', $id)->update([
-            'profile_picture' => $request->profile_picture
+            'profile_picture' => $request->file('profile_picture')->getClientOriginalName(),
         ]);
 
-        return redirect()->back(); 
+        $profile_picture = $request->file('profile_picture');
+
+        $name = $request->file('profile_picture')->getClientOriginalName();
+        $profile_picture->move(public_path("assets"), $name);
+
+        return redirect()->back();
     }
 
     public function logout()

@@ -71,3 +71,5 @@ Route::get('/download/{preview}', 'PaperController@downloadPaper')->name('downlo
 Route::get('/download/{file}', 'PaperController@downloadAdditionalFile')->name('download_additional_file');
 
 Route::post('/comment/create/{paper_id}', 'CommentController@createComment')->name('create_comment');
+
+Route::get('/notification/delete/{notification_id}/{paper_id}', 'NotificationController@deleteNotification')->name('delete_notification');

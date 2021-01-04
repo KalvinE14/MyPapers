@@ -209,12 +209,14 @@
                             <div class="notifications mt-1" id="box" style="color: #2b2d42; font-family: 'Poppins', sans-serif;">
                                 <h2 style="color: red">Notifications - <span style="color: red">{{ $totalNotification }}</span></h2>
                                 @foreach ($notifications as $notification)
-                                    <div class="notifications-item"> <img src="{{ url('assets/' . $notification->profile_picture) }}" alt="img">
-                                        <div class="text">
-                                            <h4>{{ $notification->name }}</h4>
-                                            <p>{{ $notification->message }}</p>
+                                    <a href="{{ route('delete_notification', [$notification->notification_id, $notification->paper_id]) }}" style="text-decoration: none;color: black;">
+                                        <div class="notifications-item"> <img src="{{ url('assets/' . $notification->profile_picture) }}" alt="img">
+                                            <div class="text">
+                                                <h4>{{ $notification->name }}</h4>
+                                                <p>{{ $notification->message }}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
