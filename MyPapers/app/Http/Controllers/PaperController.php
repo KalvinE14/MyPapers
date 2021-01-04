@@ -133,7 +133,7 @@ class PaperController extends Controller
                 'status' => "Waiting",
                 'file' => $request->file('file')->getClientOriginalName(),
                 'preview' => null,
-                'user_id' => 1,
+                'user_id' => Session::get('user_id'),
                 'expert_id'=> null
             ]);
 
@@ -151,7 +151,7 @@ class PaperController extends Controller
                 'status' => "Waiting",
                 'file' => null,
                 'preview' => null,
-                'user_id' => 1,
+                'user_id' => Session::get('user_id'),
                 'expert_id'=> null
             ]);
         }

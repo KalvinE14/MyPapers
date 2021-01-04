@@ -62,7 +62,6 @@ class ExpertController extends Controller
             'dob' => $req->input('dob'), 
             'gender' => $req->input('gender'),
             'profile_picture' => 'anonymous.png',
-            'rating' => 0.0,
         ]);
         
         return redirect()->back();
