@@ -64,7 +64,10 @@ Route::get('/paper/paper_detail/{paper_id}', 'PaperController@showPaperDetail')-
 Route::get('/paper/history', 'PaperController@showHistory')->name('paper_history');
 Route::get('/paper/accept/{paper_id}', 'PaperController@acceptOrder')->name('accept_order');
 Route::get('/paper/cancel/{paper_id}', 'PaperController@deletePaper')->name('cancel_order');
+Route::post('/paper/update/preview/{paper_id}', 'PaperController@updatePreview')->name('update_preview');
+Route::post('/paper/update/file/{paper_id}', 'PaperController@updateAdditionalFile')->name('update_additional_file');
 
 Route::get('/download/{preview}', 'PaperController@downloadPaper')->name('download_paper');
+Route::get('/download/{file}', 'PaperController@downloadAdditionalFile')->name('download_additional_file');
 
 Route::post('/comment/create/{paper_id}', 'CommentController@createComment')->name('create_comment');

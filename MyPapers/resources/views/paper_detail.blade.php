@@ -20,11 +20,18 @@
                 <h6 class="mb-3" style="font-weight: 100">{{ $paper->type }}</h6>
             </div>
             <div class="col-5 mt-5" style="display: inline; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
+                @if(strcmp(Session::get('role'), "User") == 0)
                 <h5>Additional File</h5>
-                <div class="input-group mb-5">
-                    <input type="file" class="form-control" id="inputGroupFile02">
-                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                </div>
+                <form action="{{ route('update_additional_file', $paper->paper_id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="input-group mb-5">
+                        <input name="file" type="file" class="form-control" id="inputGroupFile02">
+                        <button type="submit" class="input-group-text" name="update">Upload</button>
+                    </div>
+                    @if($errors->any())
+                        <p style="color: red;">{{$errors->first()}}</p>
+                    @endif
+                </form>
                 <h5>Download Paper</h5>
                 <div class="row mb-5">
                     <div class="col-6 mt-1">
@@ -36,12 +43,40 @@
                     </div>
                     <div class="col-6">
                         @if($paper->preview != null)
-                        <span><button type="submit" class="btn btn-danger mt-1" style="width: 120px; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 500; color: white;">Download</button></span>
+                        <a href="{{ route('download_paper', $paper->preview) }}"><span><button type="submit" class="btn btn-danger mt-1" style="width: 120px; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 500; color: white;">Download</button></span></a>
                         @endif
                     </div>
                 </div>
                 @if($paper->preview != null)
                 <button type="button" class="btn btn-success" style="width: 100%; border-radius: 50px">Finish</button>
+                @endif
+                @else
+                <h5>Upload File</h5>
+                <form action="{{ route('update_preview', $paper->paper_id) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="input-group mb-4">
+                        <input name="preview" type="file" class="form-control" id="inputGroupFile02">
+                        <button type="submit" class="input-group-text" name="update">Upload</button>
+                    </div>
+                    @if($errors->any())
+                        <p style="color: red;">{{$errors->first()}}</p>
+                    @endif
+                </form>
+                <h5>Download Additional File</h5>
+                <div class="row mb-5">
+                    <div class="col-6 mt-1">
+                        @if($paper->file == null)
+                        <span><h6 class="mb-4 mt-2" style="font-weight: 100; width: auto;">There is no additional file</h6></span>
+                        @else
+                        <span><h6 class="mb-4 mt-2" style="font-weight: 100; width: 40%;">{{ $paper->file }}</h6></span>
+                        @endif
+                    </div>
+                    <div class="col-6">
+                        @if($paper->file != null)
+                        <a href="{{ route('download_additional_file', $paper->file) }}"><span><button type="submit" class="btn btn-danger mt-1" style="width: 120px; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 500; color: white;">Download</button></span></a>
+                        @endif
+                    </div>
+                </div>
                 @endif
                 
             </div>

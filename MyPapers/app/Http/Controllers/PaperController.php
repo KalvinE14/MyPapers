@@ -116,14 +116,14 @@ class PaperController extends Controller
             'type' => 'required',
             'requirement' => 'required',
             'description' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg',
+            'file' => 'nullable|mimes:docx,pdf',
         ]);
 
         if($validator->fails()){
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        if($request->file('image') != null)
+        if($request->file('file') != null)
         {
             Paper::create([
                 'title' => $request->title,
@@ -131,15 +131,15 @@ class PaperController extends Controller
                 'requirement' => $request->requirement,
                 'description' => $request->description,
                 'status' => "Pending",
-                'file' => $request->file('image')->getClientOriginalName(),
+                'file' => $request->file('file')->getClientOriginalName(),
                 'preview' => null,
                 'user_id' => 1,
                 'expert_id'=> null
             ]);
 
-            $image = $request->file('image');
+            $image = $request->file('file');
 
-            $name = $request->file('image')->getClientOriginalName();
+            $name = $request->file('file')->getClientOriginalName();
             $image->move(public_path("assets"), $name);
         }else
         {
@@ -316,5 +316,55 @@ class PaperController extends Controller
         Paper::where('paper_id', '=', $id)->delete();
 
         return redirect()->back(); 
+    }
+
+    public function updatePreview(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'preview' => 'required|image|mimes:jpeg,png,jpg',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        Paper::where('paper_id', '=', $id)->update([
+           'preview' => $request->file('preview')->getClientOriginalName(),
+        ]);
+
+        $preview = $request->file('preview');
+
+        $name = $request->file('preview')->getClientOriginalName();
+        $preview->move(public_path("assets"), $name);
+
+        return redirect()->back();
+    }
+
+    public function downloadAdditionalFile($file){
+        $file = public_path('assets/').$file;
+
+        return response()->download($file);
+    }
+
+    public function updateAdditionalFile(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'required|mimes:docx,pdf',
+        ]);
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        Paper::where('paper_id', '=', $id)->update([
+           'file' => $request->file('file')->getClientOriginalName(),
+        ]);
+
+        $file = $request->file('file');
+
+        $name = $request->file('file')->getClientOriginalName();
+        $file->move(public_path("assets"), $name);
+
+        return redirect()->back();
     }
 }

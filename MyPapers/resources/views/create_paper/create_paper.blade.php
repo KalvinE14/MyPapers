@@ -43,7 +43,7 @@
                 </div>
 
                 <div id="file" style="margin-bottom: 30px;text-align: center;">
-                    <input style="width: 240px;color: white;" type="file" name="image" id="actual-btn" onclick="changeLabelText()" hidden>
+                    <input style="width: 240px;color: white;" type="file" name="file" id="actual-btn" onclick="changeLabelText()" hidden>
                     <label id="file_label" for="actual-btn">Choose File</label>
                     <span style="margin-left: 5px;">
                         <label style="color: white;font-size: 13px;font-family: sans-serif;" id="file-name" for="actual-btn">No file choosen</label>
