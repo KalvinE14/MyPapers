@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;600;700&display=swap" rel="stylesheet">
     <title>@yield('title')</title>
   </head>
-  <body style="background-color: #293241; background-image: url(assets/bg.png); background-position: top right -200px; background-repeat: no-repeat; background-size: 60vmax; height: 100%">
+  <body style="background-color: #293241; background-image: url('{{asset('assets/bg.png')}}'); background-position: top right -200px; background-repeat: no-repeat; background-size: 60vmax; height: 100%">
     <div class="container mt-3">
         <nav class="navbar navbar-light bg-transparent">
             <div class="container-fluid">
