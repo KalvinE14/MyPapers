@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4" style="text-align: right">
-                                <a class="btn" style="color: white">
+                                <a href="{{ route('paper_detail', $upcomingPaper->paper_id) }}" class="btn" style="color: white">
                                     <h5 style="margin-top: 50%">See More ></h5>
                                 </a>
                             </div>

@@ -206,11 +206,17 @@ class UserController extends Controller
 
                 $user = User::where('user_id', 'LIKE', $user_id)->get();
 
+                $notifications = Notification::join('papers', 'notifications.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    where('papers.user_id', '=', $user_id)->get();
+                
+                $totalNotification = count($notifications);
+
                 return view('update_profile', ['user' => $user])
-                    ->with('totalCv', count($totalCv))->with('totalBrochure', count($totalBrochure))
-                    ->with('totalLeaflet', count($totalLeaflet))
-                    ->with('cvPercentage', $cvPercentage)->with('brochurePercentage', $brochurePercentage)
-                    ->with('leafletPercentage', $leafletPercentage);
+                    ->with('totalCv', $cvPercentage)->with('totalBrochure', count($totalCv))
+                    ->with('cvPercentage', $brochurePercentage)->with('brochurePercentage',  count($totalBrochure))
+                    ->with('leafletPercentage', $leafletPercentage)->with('totalLeaflet', count($totalLeaflet))
+                    ->with('notifications', $notifications)->with('totalNotification', $totalNotification);
             }
             
             return redirect()->back();

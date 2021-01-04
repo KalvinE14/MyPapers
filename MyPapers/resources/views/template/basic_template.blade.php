@@ -185,7 +185,13 @@
                     </div>
                     @endif
                     <div class="col mt-3">
+                        @if(strcmp(Session::get('role'), 'User') == 0)
+                        <a class="nav-item nav-link" href="{{ route('profile_user') }}" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</a>
+                        @elseif(strcmp(Session::get('role'), 'Expert') == 0)
+                        <a class="nav-item nav-link" href="{{ route('profile_expert') }}" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</a>
+                        @else
                         <p class="nav-item nav-link" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</p>
+                        @endif
                     </div>
                     <div class="col mt-3">
                         <a class="nav-item nav-link" href="{{ route('user_logout') }}" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">Logout</a>

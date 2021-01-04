@@ -60,11 +60,11 @@ Route::get('/paper/create_cv', 'PaperController@createCv')->name('create_paper_c
 Route::get('/paper/create_brochure', 'PaperController@createBrochure')->name('create_paper_brochure');
 Route::get('/paper/create_leaflet', 'PaperController@createLeaflet')->name('create_paper_leaflet');
 Route::post('/paper/create', 'PaperController@store')->name('create_paper');
-Route::get('/paper/paper_detail/{paper_id}/{user_id}', 'PaperController@showPaperDetail');
+Route::get('/paper/paper_detail/{paper_id}', 'PaperController@showPaperDetail')->name('paper_detail');
 Route::get('/paper/history', 'PaperController@showHistory')->name('paper_history');
 Route::get('/paper/accept/{paper_id}', 'PaperController@acceptOrder')->name('accept_order');
 Route::get('/paper/cancel/{paper_id}', 'PaperController@deletePaper')->name('cancel_order');
 
 Route::get('/download/{preview}', 'PaperController@downloadPaper')->name('download_paper');
 
-
+Route::post('/comment/create/{paper_id}', 'CommentController@createComment')->name('create_comment');

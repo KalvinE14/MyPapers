@@ -33,9 +33,11 @@
                         <h5 style="margin-left: 3px; display: inline">{{ $waitingPaper->created_at }}</h5>
                     </div>
                     <div class="col-2 mt-1" style="text-align: right">
-                        <button type="submit" class="btn btn-danger btn-lg pt-2" style="border-radius: 50px; margin-right: 8px; width: 170px;">
-                            <h5 style="margin-top: auto;margin-left: auto;margin-bottom: auto;margin-right: auto;">View Detail</h5>
-                        </button>
+                        <a href="{{ route('paper_detail', $waitingPaper->paper_id) }}">
+                            <button type="submit" class="btn btn-danger btn-lg pt-2" style="border-radius: 50px; margin-right: 8px; width: 170px;">
+                                <h5 style="margin-top: auto;margin-left: auto;margin-bottom: auto;margin-right: auto;">View Detail</h5>
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>

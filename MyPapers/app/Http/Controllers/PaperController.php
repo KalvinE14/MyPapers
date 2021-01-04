@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Expert;
 use App\Notification;
 use App\Paper;
+use App\User;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -48,9 +51,62 @@ class PaperController extends Controller
         return view('paper', ['papers' => $papers]);
     }
 
-    public function showPaperDetail($paper_id, $user_id){
-        $papers = Paper::where('user_id', $user_id)->where('paper_id', $paper_id)->first();
-        return view('paper_detail', ['papers' => $papers]);
+    public function showPaperDetail($paper_id){
+        if(Session::get('username') != null)
+        {
+            $paper = Paper::where('paper_id', $paper_id)->first();
+
+            if(strcmp(Session::get('role'), "User") == 0)
+            {
+                $user_id = Session::get('user_id');
+
+                $user = User::where('user_id', '=', $user_id)->first();
+
+                $notifications = Notification::join('papers', 'notifications.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    where('papers.user_id', '=', $user_id)->get();
+
+                $totalNotification = count($notifications);
+
+                $comments = Comment::select('comment_id', 'user_comment', 'expert_comment', 'comments.created_at', 'comment',
+                                    'users.name as userName', 'users.profile_picture as userPicture', 'experts.name as expertName', 
+                                    'experts.profile_picture as expertPicture')->
+                                    join('papers', 'comments.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    join('experts', 'papers.expert_id', '=', 'experts.expert_id')->
+                                    where('papers.paper_id', '=', $paper_id)->get();
+
+                $totalComment = count($comments);
+
+                return view('paper_detail', ['paper' => $paper])->
+                        with('notifications', $notifications)->with('totalNotification', $totalNotification)->
+                        with('comments', $comments)->with('totalComment', $totalComment)->
+                        with('user', $user);
+            }else if(strcmp(Session::get('role'), "Expert") == 0)
+            {
+                $expert_id = Session::get('expert_id');
+
+                $expert = Expert::where('expert_id', '=', $expert_id)->first();
+
+                $comments = Comment::select('comment_id', 'user_comment', 'expert_comment', 'comments.created_at', 'comment',
+                                    'users.name as userName', 'users.profile_picture as userPicture', 'experts.name as expertName', 
+                                    'experts.profile_picture as expertPicture')->
+                                    join('papers', 'comments.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    join('experts', 'papers.expert_id', '=', 'experts.expert_id')->
+                                    where('papers.paper_id', '=', $paper_id)->get();
+
+                $totalComment = count($comments);
+
+                return view('paper_detail', ['paper' => $paper])->
+                        with('comments', $comments)->with('totalComment', $totalComment)->
+                        with('expert', $expert);
+            }
+            
+            return redirect()->back();
+        }
+
+        return redirect()->route('start_page');
     }
 
     public function store(Request $request)
@@ -109,7 +165,15 @@ class PaperController extends Controller
         {
             if(strcmp(Session::get('role'), "User") == 0)
             {
-                return view('create_paper.create_paper')->with('paper_type', 'Curriculum Vitae');
+                $user_id = Session::get('user_id');
+
+                $notifications = Notification::join('papers', 'notifications.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    where('papers.user_id', '=', $user_id)->get();
+                
+                $totalNotification = count($notifications);
+
+                return view('create_paper.create_paper')->with('paper_type', 'Curriculum Vitae')->with('notifications', $notifications)->with('totalNotification', $totalNotification);
             }
 
             return redirect()->back();
@@ -124,7 +188,15 @@ class PaperController extends Controller
         {
             if(strcmp(Session::get('role'), "User") == 0)
             {
-                return view('create_paper.create_paper')->with('paper_type', 'Brochure');
+                $user_id = Session::get('user_id');
+
+                $notifications = Notification::join('papers', 'notifications.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    where('papers.user_id', '=', $user_id)->get();
+                
+                $totalNotification = count($notifications);
+
+                return view('create_paper.create_paper')->with('paper_type', 'Brochure')->with('notifications', $notifications)->with('totalNotification', $totalNotification);
             }
 
             return redirect()->back();
@@ -139,7 +211,15 @@ class PaperController extends Controller
         {
             if(strcmp(Session::get('role'), "User") == 0)
             {
-                return view('create_paper.create_paper')->with('paper_type', 'Leaflet');
+                $user_id = Session::get('user_id');
+
+                $notifications = Notification::join('papers', 'notifications.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    where('papers.user_id', '=', $user_id)->get();
+                
+                $totalNotification = count($notifications);
+
+                return view('create_paper.create_paper')->with('paper_type', 'Leaflet')->with('notifications', $notifications)->with('totalNotification', $totalNotification);
             }
 
             return redirect()->back();
@@ -162,7 +242,15 @@ class PaperController extends Controller
             {
                 $papers = Paper::join('experts', 'papers.expert_id', '=', 'experts.expert_id')->where('user_id', Session::get('user_id'))->where('status', 'LIKE', 'Finished')->get();
 
-                return view('history.paper_history', ['papers' => $papers]);
+                $user_id = Session::get('user_id');
+
+                $notifications = Notification::join('papers', 'notifications.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    where('papers.user_id', '=', $user_id)->get();
+                
+                $totalNotification = count($notifications);
+
+                return view('history.paper_history', ['papers' => $papers])->with('notifications', $notifications)->with('totalNotification', $totalNotification);
             }else if(strcmp(Session::get('role'), "Expert") == 0)
             {
                 $papers = Paper::join('users', 'papers.user_id', '=', 'users.user_id')->where('expert_id', Session::get('expert_id'))->where('status', 'LIKE', 'Finished')->get();
@@ -183,7 +271,15 @@ class PaperController extends Controller
         {
             if(strcmp(Session::get('role'), "User") == 0)
             {
-                return view('create_paper.choose_paper');
+                $user_id = Session::get('user_id');
+
+                $notifications = Notification::join('papers', 'notifications.paper_id', '=', 'papers.paper_id')->
+                                    join('users', 'papers.user_id', '=', 'users.user_id')->
+                                    where('papers.user_id', '=', $user_id)->get();
+                
+                $totalNotification = count($notifications);
+
+                return view('create_paper.choose_paper')->with('notifications', $notifications)->with('totalNotification', $totalNotification);
             }
 
             return redirect()->back();
