@@ -1,12 +1,12 @@
 @extends('template_guest.template_guest')
 @section('title', 'Register')
 @section('content')
-   <div class="container" style="margin-top: 50px; margin-bottom: 30px;">
+   <div class="container" style="margin-top: 50px; margin-bottom: 30px; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
     <div class="container" style="width: 100%; margin-bottom: 30px;">
         <h1 style="color: white;">Register</h1>
     </div> 
     
-	<div class="container" style="width: 100%; padding-right: 1000px; margin-bottom: 10px;">
+	<div class="container" style="width: 100%; padding-right: 1000px; margin-bottom: 10px; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
 		<form action="{{ route('register_user') }}" method="post">
 			{{csrf_field()}}
 			<div class="row" style="width: auto; height: auto;">

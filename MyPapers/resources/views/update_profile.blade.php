@@ -40,6 +40,7 @@
             <div class="col-8 mt-2 pt-3 pb-3" style="background:#33415c; border-radius: 15px; padding-left: 20px; padding-right: 20px">
                 <h5>New Profile Picture</h5>
                 <input class=" form-control" type="file" id="profilePicture">
+                <button type="submit" class="btn btn-danger">Submit</button>
             </div>
         </div>
 

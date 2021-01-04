@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-5 pt-5" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-    <a href="{{ route('paper_history') }}"><button type="submit" class="btn btn-danger btn-lg ml-5" style="border-radius: 50px">View Order History</button></a>
+        <a href="{{ route('paper_history') }}"><button type="submit" class="btn btn-danger btn-lg ml-5" style="border-radius: 50px">View Order History</button></a>
     </div>
     <div class="container">
         <hr style="border-top: 1px solid white">
@@ -11,20 +11,20 @@
         <div class="row">
             <div class="col-md-6">
                 <h3>Upcoming Order</h3>
-                @foreach($upcomingPapers as $upcomingPaper)
-                    <div class="container mt-3 pt-3 pb-1" style="background:#33415c; border-radius: 15px; padding-left: 20px; padding-right: 20px">
+                @foreach ($upcomingPapers as $upcomingPaper)
+                    <div class="container mt-3 pt-3 pb-3" style="background:#33415c; border-radius: 15px; padding-left: 20px; padding-right: 20px">
                         <div class="row">
                             <div class="col-md-8">
                                 <h4 style="display: inline;">{{ $upcomingPaper->title }}</h4>
                                 <span class="badge rounded-pill bg-danger" style="margin-left: 6px">{{ $upcomingPaper->type }}</span>
                                 <div>
-                                    <img style="margin-right: 5px" class="pt-1 mt-2" src="{{ url('assets/' . $upcomingPaper->profile_picture ) }}" alt="" width="50px">
+                                    <img style="margin-right: 5px" class="pt-1 mt-2" src="{{ url('assets/' . $upcomingPaper->profile_picture) }}" alt="" width="50px">
                                     <h5 style="display: inline;">{{ $upcomingPaper->name }}</h5>
                                 </div>
                             </div>
                             <div class="col-md-4" style="text-align: right">
                                 <a href="{{ route('paper_detail', $upcomingPaper->paper_id) }}" class="btn" style="color: white">
-                                    <h5 style="margin-top: 50%">See More ></h5>
+                                    <h5 style="margin-top: 65%">See More ></h5>
                                 </a>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-6">
                 <h3>Available Order</h3>
-                @foreach($availablePapers as $availablePaper)
+                @foreach ($availablePapers as $availablePaper)
                     <div class="container mt-3 pt-3 pb-3" style="background:#33415c; border-radius: 15px; padding-left: 20px; padding-right: 20px">
                         <div class="row">
                             <div class="col-md-10">

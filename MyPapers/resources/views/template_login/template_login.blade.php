@@ -2,11 +2,11 @@
 @section('title', 'Login Menu')
 @section('content')
    <div class="container" style="margin-top: 75px">
-    <div class="container" style="width: 100%; margin-bottom: 30px;">
+    <div class="container pt-5" style="width: 100%; margin-bottom: 30px; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
         <h1 style="color: white;">Login</h1>
     </div> 
     
-	<div class="container" style="width: 100%; padding-right: 1000px; margin-bottom: 10px;">
+	<div class="container" style="width: 100%; padding-right: 1000px; margin-bottom: 10px; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
 		@yield('action')
 			{{csrf_field()}}
 			<div class="form-group" style="margin-bottom: 20px;">

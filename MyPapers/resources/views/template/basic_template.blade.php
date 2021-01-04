@@ -58,7 +58,7 @@
         }
 
         .notifications h2 {
-            font-size: 14px;
+            font-size: 18px;
             padding: 10px;
             border-bottom: 1px solid #eee;
             color: #999
@@ -90,7 +90,6 @@
         }
 
         .notifications-item .text h4 {
-            color: #777;
             font-size: 16px;
             margin-top: 3px
         }
@@ -110,6 +109,11 @@
 
     <script type="text/javascript">
         var down = false;
+        var downName = false;
+        var downAddress = false;
+        var downPass = false;
+        var downProfile = false;
+        var downHire = false;
 
         function notification() {
             var color = $(this).text();
@@ -130,24 +134,55 @@
             $('#box').css('visibility', 'visible');
         }
 
+
         function updateName() {
-            $('#updateName').css('display', 'block');
+            if (downName) {
+                $('#updateName').css('display', 'none');
+                downName = false;
+            } else {
+                $('#updateName').css('display', 'block');
+                downName = true;
+            }
         }
 
         function updateAddress() {
-            $('#updateAddress').css('display', 'block');
+            if (downAddress) {
+                $('#updateAddress').css('display', 'none');
+                downAddress = false;
+            } else {
+                $('#updateAddress').css('display', 'block');
+                downAddress = true;
+            }
         }
 
         function updatePassword() {
-            $('#changePass').css('display', 'block');
+            if (downPass) {
+                $('#changePass').css('display', 'none');
+                downPass = false;
+            } else {
+                $('#changePass').css('display', 'block');
+                downPass = true;
+            }
         }
 
         function updateProfilePicture() {
-            $('#changeProfilePicture').css('display', 'block');
+            if (downProfile) {
+                $('#changeProfilePicture').css('display', 'none');
+                downProfile = false;
+            } else {
+                $('#changeProfilePicture').css('display', 'block');
+                downProfile = true;
+            }
         }
 
         function hireEmployee() {
-            $('#hireEmployee').css('display', 'block');
+            if (downHire) {
+                $('#hireEmployee').css('display', 'none');
+                downHire = false;
+            } else {
+                $('#hireEmployee').css('display', 'block');
+                downHire = true;
+            }
         }
 
     </script>
@@ -155,42 +190,42 @@
     <div class="container-md mt-3">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
             <div class="container">
-                @if(strcmp(Session::get('role'), 'User') == 0)
-                <a class="navbar-brand" href="{{ route('home_user') }}" style="margin-left: -20px">
-                @elseif(strcmp(Session::get('role'), 'Expert') == 0)
-                <a class="navbar-brand" href="{{ route('home_expert') }}" style="margin-left: -20px">
-                @else
-                <a class="navbar-brand" href="{{ route('home_admin') }}" style="margin-left: -20px">
+                @if (strcmp(Session::get('role'), 'User') == 0)
+                    <a class="navbar-brand" href="{{ route('home_user') }}" style="margin-left: -20px">
+                    @elseif(strcmp(Session::get('role'), 'Expert') == 0)
+                        <a class="navbar-brand" href="{{ route('home_expert') }}" style="margin-left: -20px">
+                        @else
+                            <a class="navbar-brand" href="{{ route('home_admin') }}" style="margin-left: -20px">
                 @endif
-                    <img src="/assets/Logo.png" alt="" class="d-inline-block align-center" style="width: 100px; height: 100px">
-                    <h3 class="d-inline-block" style="margin-left: -10px; font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px">MyPapers</h3>
+                <img src="/assets/Logo.png" alt="" class="d-inline-block align-center" style="width: 100px; height: 100px">
+                <h3 class="d-inline-block" style="margin-left: -10px; font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px">MyPapers</h3>
                 </a>
-                
-                
+
+
                 <div class="row ml-auto align-self-center">
-                    @if(strcmp(Session::get('role'), 'User') == 0)
-                    <div class="col">
-                        <div class="icon" id="bell"><img onclick="notification()" src="https://i.imgur.com/AC7dgLA.png" alt=""></div>
-                        <div class="notifications mt-1" id="box">
-                            <h2>Notifications - <span>{{ $totalNotification }}</span></h2>
-                            @foreach($notifications as $notification)
-                            <div class="notifications-item"> <img src="{{ url('assets/' . $notification->profile_picture) }}" alt="img">
-                                <div class="text">
-                                    <h4>{{ $notification->name }}</h4>
-                                    <p>{{ $notification->message }}</p>
-                                </div>
+                    @if (strcmp(Session::get('role'), 'User') == 0)
+                        <div class="col">
+                            <div class="icon" id="bell"><img onclick="notification()" src="https://i.imgur.com/AC7dgLA.png" alt=""></div>
+                            <div class="notifications mt-1" id="box" style="color: #2b2d42; font-family: 'Poppins', sans-serif;">
+                                <h2 style="color: red">Notifications - <span style="color: red">{{ $totalNotification }}</span></h2>
+                                @foreach ($notifications as $notification)
+                                    <div class="notifications-item"> <img src="{{ url('assets/' . $notification->profile_picture) }}" alt="img">
+                                        <div class="text">
+                                            <h4>{{ $notification->name }}</h4>
+                                            <p>{{ $notification->message }}</p>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            @endforeach
                         </div>
-                    </div>
                     @endif
                     <div class="col mt-3">
-                        @if(strcmp(Session::get('role'), 'User') == 0)
-                        <a class="nav-item nav-link" href="{{ route('profile_user') }}" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</a>
+                        @if (strcmp(Session::get('role'), 'User') == 0)
+                            <a class="nav-item nav-link" href="{{ route('profile_user') }}" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</a>
                         @elseif(strcmp(Session::get('role'), 'Expert') == 0)
-                        <a class="nav-item nav-link" href="{{ route('profile_expert') }}" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</a>
+                            <a class="nav-item nav-link" href="{{ route('profile_expert') }}" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</a>
                         @else
-                        <p class="nav-item nav-link" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</p>
+                            <p class="nav-item nav-link" style="font-weight: 700; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 2px;">{{ Session::get('username') }}</p>
                         @endif
                     </div>
                     <div class="col mt-3">
@@ -211,9 +246,9 @@
             <hr style="border-top: 1px solid white">
         </div>
         <div class="container mt-3" style="text-align: center">
-            <a href="https://www.facebook.com"><img src="/assets/facebook_logos_PNG19751.png" alt="" style="width: 50px; height: 35px"></a>
-            <a href="https://www.twitter.com"><img src="/assets/twitter.png" alt="" style="width: 50px; height: 50px"></a>
-            <a href="https://www.instagram.com"><img src="/assets/instagram.png" alt="" style="width: 40px; height: 40px"></a>
+            <a href="https://www.facebook.com/kmgmypapers"><img src="/assets/facebook_logos_PNG19751.png" alt="" style="width: 50px; height: 35px"></a>
+            <a href="https://www.twitter.com/kmgmypapers"><img src="/assets/twitter.png" alt="" style="width: 50px; height: 50px"></a>
+            <a href="https://www.instagram.com/kmgmypapers"><img src="/assets/instagram.png" alt="" style="width: 40px; height: 40px"></a>
         </div>
         <div class="container mt-2" style="text-align: center">
             <h6 style="font-size: 14px; font-weight: 500; font-family: 'Poppins', sans-serif; color: white; letter-spacing: 1px;">Copyright &copy; 2020 MyPapers. All Rights Reserved</h6>
