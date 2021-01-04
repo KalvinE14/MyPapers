@@ -130,7 +130,7 @@ class PaperController extends Controller
                 'type' => $request->type,
                 'requirement' => $request->requirement,
                 'description' => $request->description,
-                'status' => "Pending",
+                'status' => "Waiting",
                 'file' => $request->file('file')->getClientOriginalName(),
                 'preview' => null,
                 'user_id' => 1,
@@ -148,7 +148,7 @@ class PaperController extends Controller
                 'type' => $request->type,
                 'requirement' => $request->requirement,
                 'description' => $request->description,
-                'status' => "Pending",
+                'status' => "Waiting",
                 'file' => null,
                 'preview' => null,
                 'user_id' => 1,
@@ -156,7 +156,7 @@ class PaperController extends Controller
             ]);
         }
 
-        return redirect('/papers')->with('status', 'Paper has been created!');
+        return redirect()->back();
     }
 
     public function createCv()

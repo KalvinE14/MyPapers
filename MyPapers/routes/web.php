@@ -15,14 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'UserController@startPage')->name('start_page');
 
-Route::get('/detail', function(){
-    return view('paper_detail');
-});
-
-Route::get('/home_admin', function(){
-    return view('home/home_admin');
-});
-
 Route::get('/signup/user', 'UserController@showSignUp')->name('register_page');
 Route::post('/signup/user', 'UserController@doSignUp')->name('register_user');
 Route::get('/login/menu', 'UserController@showLoginMenu')->name('login_menu');
