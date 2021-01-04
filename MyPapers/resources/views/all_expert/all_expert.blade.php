@@ -9,7 +9,7 @@
     <div class="container mt-5 mb-4" style="margin-left: 25px; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
         <button type="submit" onclick="hireEmployee()" class="btn btn-danger btn-lg" style="border-radius: 50px">Hire New Employee</button>
         <div class="row mt-4" style="margin-left: 1px; display: none" id="hireEmployee">
-            <div class="col-6 pt-4 pb-4" style="background:#33415c; border-radius: 15px; padding-left: 20px; padding-right: 20px"">
+            <div class="col-6 pt-4 pb-4" style="background:#33415c; border-radius: 15px; padding-left: 20px; padding-right: 20px">
                 <form action="{{ route('register_expert') }}" method="post">    
                     @csrf
                     <input type="text" id="oldPass" name="name" placeholder="Name" class="form-control mb-3">
