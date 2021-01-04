@@ -301,7 +301,7 @@ class PaperController extends Controller
         
                 Notification::create([
                     'paper_id' => $id, 
-                    'message' => "Requested paper have been accepted", 
+                    'message' => "The requested paper has been accepted", 
                 ]);
             }
 
@@ -366,5 +366,27 @@ class PaperController extends Controller
         $file->move(public_path("assets"), $name);
 
         return redirect()->back();
+    }
+
+    public function finishOrder($id)
+    {
+        if(Session::get('username') != null)
+        {
+            if(strcmp(Session::get('role'), "User") == 0)
+            {
+                Paper::where('paper_id', '=', $id)->update([
+                    'status' => 'Finished',
+                ]);
+        
+                Notification::create([
+                    'paper_id' => $id, 
+                    'message' => "A paper has been uploaded by expert", 
+                ]);
+            }
+
+            return redirect()->route('paper_history');
+        }
+
+        return redirect()->route('start_page');
     }
 }

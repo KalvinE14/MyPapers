@@ -20,7 +20,7 @@
                 <h6 class="mb-3" style="font-weight: 100">{{ $paper->type }}</h6>
             </div>
             <div class="col-5 mt-5" style="display: inline; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                @if (strcmp(Session::get('role'), 'User') == 0)
+                @if (strcmp(Session::get('role'), 'User') == 0 && strcmp($paper->status, "Finished") != 0)
                     <h5>Additional File</h5>
                     <form action="{{ route('update_additional_file', $paper->paper_id) }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -52,9 +52,11 @@
                         </div>
                     </div>
                     @if ($paper->preview != null)
-                        <button type="button" class="btn btn-success" style="width: 100%; border-radius: 50px">Finish</button>
+                        <a href="{{ route('finish_order', $paper->paper_id) }}">
+                            <button type="button" class="btn btn-success" style="width: 100%; border-radius: 50px">Finish</button>
+                        </a>
                     @endif
-                @else
+                @elseif(strcmp(Session::get('role'), 'Expert') == 0 && strcmp($paper->status, "Finished") != 0)
                     <h5>Upload File</h5>
                     <form action="{{ route('update_preview', $paper->paper_id) }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -161,6 +163,7 @@
             @endif
         @endforeach
     </div>
+    @if(strcmp($paper->status, "Finished") != 0)
     <div class="container">
         <hr style="border-top: 1px solid white">
     </div>
@@ -195,4 +198,5 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection

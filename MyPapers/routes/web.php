@@ -58,6 +58,7 @@ Route::get('/paper/accept/{paper_id}', 'PaperController@acceptOrder')->name('acc
 Route::get('/paper/cancel/{paper_id}', 'PaperController@deletePaper')->name('cancel_order');
 Route::post('/paper/update/preview/{paper_id}', 'PaperController@updatePreview')->name('update_preview');
 Route::post('/paper/update/file/{paper_id}', 'PaperController@updateAdditionalFile')->name('update_additional_file');
+Route::get('/paper/finish/{paper_id}', 'PaperController@finishOrder')->name('finish_order');
 
 Route::get('/download/{preview}', 'PaperController@downloadPaper')->name('download_paper');
 Route::get('/download/{file}', 'PaperController@downloadAdditionalFile')->name('download_additional_file');

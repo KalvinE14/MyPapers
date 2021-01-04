@@ -1,4 +1,5 @@
 @extends('template_guest.template_guest')
+@section('title', 'Start')
 @section('content')
   <div class="container" style="margin-top: 150px; background-color: black">
     <div class="container mt-5" style="float: left; width: 100%">
