@@ -1,7 +1,7 @@
 @extends('template/basic_template')
 
 @section('content')
-    <div class="container mt-5 mb-5">
+    <div class="container mt-5 mb-5" id="detail">
         <div class="row">
             <div class="col-2">
                 @if ($paper->preview == null)
@@ -20,7 +20,7 @@
                 <h6 class="mb-3" style="font-weight: 100">{{ $paper->type }}</h6>
             </div>
             <div class="col-5 mt-5" style="display: inline; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                @if (strcmp(Session::get('role'), 'User') == 0 && strcmp($paper->status, "Finished") != 0)
+                @if (strcmp(Session::get('role'), 'User') == 0 && strcmp($paper->status, 'Finished') != 0)
                     <h5>Additional File</h5>
                     <form action="{{ route('update_additional_file', $paper->paper_id) }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -105,7 +105,7 @@
                     <div class="container mt-3 mb-1 pt-3 pb-3 pl-3 pr-3" style="border-radius: 20px; background: #33415c; filter: brightness(1.5); box-shadow: 10px 8px 8px 5px rgba(0, 0, 0, 0.2);">
                         <div class="row">
                             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                                <img class="mb-2 ml-5" src="{{ url('assets/' . $comment->expertPicture) }}" alt="" width="150px">
+                                <img class="mb-2 ml-5" src="{{ url('assets/' . $comment->expertPicture) }}" alt="" width="150px" style="border-radius: 50%">
                                 {{ $comment->expertName }}
                             </div>
                             <div class="col-10 mt-3" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
@@ -124,7 +124,7 @@
                                 {{ $comment->created_at }}
                             </div>
                             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                                <img class="ml-5" src="{{ url('assets/' . $comment->userPicture) }}" alt="" width="150px">
+                                <img class="ml-5" src="{{ url('assets/' . $comment->userPicture) }}" alt="" width="150px" style="border-radius: 50%">
                                 {{ $comment->userName }}
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                     <div class="container mt-3 mb-1 pt-3 pb-3 pl-3 pr-3" style="border-radius: 20px; background: #33415c; box-shadow: 10px 8px 8px 5px rgba(0, 0, 0, 0.2);">
                         <div class="row">
                             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                                <img class="mb-3 ml-5" src="{{ url('assets/' . $comment->userPicture) }}" alt="" width="150px">
+                                <img class="mb-3 ml-5" src="{{ url('assets/' . $comment->userPicture) }}" alt="" width="150px" style="border-radius: 50%">
                                 {{ $comment->userName }}
                             </div>
                             <div class="col-10 mt-3" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
@@ -154,7 +154,7 @@
                                 {{ $comment->created_at }}
                             </div>
                             <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                                <img class="ml-5" src="{{ url('assets/' . $comment->expertPicture) }}" alt="" width="150px">
+                                <img class="ml-5" src="{{ url('assets/' . $comment->expertPicture) }}" alt="" width="150px" style="border-radius: 50%">
                                 {{ $comment->expertName }}
                             </div>
                         </div>
@@ -163,40 +163,40 @@
             @endif
         @endforeach
     </div>
-    @if(strcmp($paper->status, "Finished") != 0)
-    <div class="container">
-        <hr style="border-top: 1px solid white">
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-                @if (strcmp(Session::get('role'), 'User') == 0)
-                    <img class="ml-5" src="{{ url('assets/' . $user->profile_picture) }}" alt="" width="150px" style="round-shadow: 10px 8px 8px 5px rgba(0, 0, 0, 0.2);">
-                    <h6 class="mt-2">{{ $user->name }}</h6>
-                @else
-                    <img class="ml-5" src="{{ url('assets/' . $expert->profile_picture) }}" alt="" width="150px" style="round-shadow: 10px 8px 8px 5px rgba(0, 0, 0, 0.2);">
-                    <h6 class="mt-2">{{ $expert->name }}</h6>
-                @endif
-            </div>
-            <div class="col-10">
-                <div class="mb-3" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
+    @if (strcmp($paper->status, 'Finished') != 0)
+        <div class="container">
+            <hr style="border-top: 1px solid white">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-2" style="text-align: center; font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
                     @if (strcmp(Session::get('role'), 'User') == 0)
-                        <h5 class="mb-3">Reply to Expert</h5>
+                        <img class="ml-5" src="{{ url('assets/' . $user->profile_picture) }}" alt="" width="150px" style="border-radius: 50%; round-shadow: 10px 8px 8px 5px rgba(0, 0, 0, 0.2);">
+                        <h6 class="mt-2">{{ $user->name }}</h6>
                     @else
-                        <h6 class="mt-2">Reply to User</h6>
+                        <img class="ml-5" src="{{ url('assets/' . $expert->profile_picture) }}" alt="" width="150px" style="border-radius: 50%; round-shadow: 10px 8px 8px 5px rgba(0, 0, 0, 0.2);">
+                        <h6 class="mt-2">{{ $expert->name }}</h6>
                     @endif
-                    <form action="{{ route('create_comment', request()->route('paper_id')) }}" method="post">
-                        @csrf
-                        <input name="expert_comment" type="hidden" value="false">
-                        <input name="user_comment" type="hidden" value="true">
-                        <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
-                        <div style="text-align: right">
-                            <button type="submit" class="btn btn-danger mt-3" style="width: 120px; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 500; color: white">Reply</button>
-                        </div>
-                    </form>
+                </div>
+                <div class="col-10">
+                    <div class="mb-3" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
+                        @if (strcmp(Session::get('role'), 'User') == 0)
+                            <h5 class="mb-3">Reply to Expert</h5>
+                        @else
+                            <h6 class="mt-2">Reply to User</h6>
+                        @endif
+                        <form action="{{ route('create_comment', request()->route('paper_id')) }}" method="post">
+                            @csrf
+                            <input name="expert_comment" type="hidden" value="false">
+                            <input name="user_comment" type="hidden" value="true">
+                            <textarea name="comment" class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                            <div style="text-align: right">
+                                <button type="submit" class="btn btn-danger mt-3" style="width: 120px; border-radius: 50px; font-family: 'Poppins', sans-serif; font-weight: 500; color: white">Reply</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
 @endsection

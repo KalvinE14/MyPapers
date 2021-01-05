@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-4">
                             <div class="container pt-1">
-                                <img style="display: inline; margin-right: 5px" class="pt-1" src="{{ url('assets/' . $waitingPaper->profile_picture) }}" alt="" width="50px">
+                                <img style="display: inline; margin-right: 5px; border-radius: 50%" class="pt-1" src="{{ url('assets/' . $waitingPaper->profile_picture) }}" alt="" width="50px">
                                 <h5 style="display: inline;">{{ $waitingPaper->name }}</h5>
                             </div>
                         </div>

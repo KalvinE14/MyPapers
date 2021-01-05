@@ -26,7 +26,7 @@
                                     <h4 style="display: inline;">{{ $upcomingPaper->title }}</h4>
                                     <span class="badge rounded-pill bg-danger" style="margin-left: 6px">{{ $upcomingPaper->type }}</span>
                                     <div>
-                                        <img style="margin-right: 5px" class="pt-1 mt-2" src="{{ url('assets/' . $upcomingPaper->profile_picture) }}" alt="" width="50px">
+                                        <img style="margin-right: 5px; border-radius: 50%" class="pt-1 mt-2" src="{{ url('assets/' . $upcomingPaper->profile_picture) }}" alt="" width="50px">
                                         <h5 style="display: inline;">{{ $upcomingPaper->name }}</h5>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="mt-3">
                                 <hr style="border-top: 1px solid white">
-                                <img style="margin-right: 5px" class="pt-1 mt-2" src="{{ url('assets/' . $availablePaper->profile_picture) }}" alt="" width="50px">
+                                <img style="margin-right: 5px; border-radius: 50%" class="pt-1 mt-2" src="{{ url('assets/' . $availablePaper->profile_picture) }}" alt="" width="50px">
                                 <h4 style="display: inline; margin-top: 20px">{{ $availablePaper->name }}</h4>
                             </div>
                             <hr style="border-top: 1px solid white">

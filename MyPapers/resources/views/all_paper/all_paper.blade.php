@@ -7,15 +7,15 @@
     </div>
 
     <div class="container mt-5" style="font-weight: 500; font-family: 'Poppins', sans-serif; color: white;">
-        @foreach($papers as $paper)
+        @foreach ($papers as $paper)
             <div class="row mt-4 pt-4 pb-3" style="padding-left: 5px; padding-right: 5px; background: #33415c; border-radius: 20px">
                 <div class="col-md-2">
-                    @if($paper->preview != null)
-                    <img src="{{ url('assets/' . $paper->preview) }}" alt="" width="200px">
+                    @if ($paper->preview != null)
+                        <img src="{{ url('assets/' . $paper->preview) }}" alt="" width="200px">
                     @else
-                    <img src="{{ url('assets/nopreview.png') }}" alt="" width="200px">
+                        <img src="{{ url('assets/nopreview.png') }}" alt="" width="200px">
                     @endif
-                    
+
                 </div>
                 <div class="col-md-10">
                     <div class="row">
@@ -46,12 +46,12 @@
                         </div>
                         <div class="col-md-3" style="text-align: center">
                             <h5>Owner</h5>
-                            <img class="mt-3" src="{{ url('assets/' . $paper->userPicture) }}" alt="" width="180px" height="180px">
+                            <img class="mt-3" src="{{ url('assets/' . $paper->userPicture) }}" alt="" style="border-radius: 50%" width="180px" height="180px">
                             <h6 class="mt-3" style="font-weight: 100">{{ $paper->userName }}</h6>
                         </div>
                         <div class="col-md-3" style="text-align: center">
                             <h5>Expert</h5>
-                            <img class="mt-3" src=" {{ url('assets/' . $paper->expertPicture) }}" alt="" width="180px" height="180px">
+                            <img class="mt-3" src=" {{ url('assets/' . $paper->expertPicture) }}" alt="" style="border-radius: 50%" width="180px" height="180px">
                             <h6 class="mt-3" style="font-weight: 100">{{ $paper->expertName }}</h6>
                         </div>
                     </div>
