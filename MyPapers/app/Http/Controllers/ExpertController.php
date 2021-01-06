@@ -141,12 +141,15 @@ class ExpertController extends Controller
             if(strcmp($role, "Expert") == 0)
             {
                 $totalCv = Expert::join('papers', 'experts.expert_id', '=', 'papers.expert_id')->
+                            where('papers.expert_id', '=', $expert_id)->where('status', 'LIKE', 'Finished')->
                             where('type', 'LIKE', 'Curriculum Vitae')->get();
 
                 $totalBrochure = Expert::join('papers', 'experts.expert_id', '=', 'papers.expert_id')->
+                            where('papers.expert_id', '=', $expert_id)->where('status', 'LIKE', 'Finished')->
                             where('type', 'LIKE', 'Brochure')->get();
 
                 $totalLeaflet = Expert::join('papers', 'experts.expert_id', '=', 'papers.expert_id')->
+                            where('papers.expert_id', '=', $expert_id)->where('status', 'LIKE', 'Finished')->
                             where('type', 'LIKE', 'Leaflet')->get();
 
                 $totalPaper = count($totalCv) + count($totalBrochure) + count($totalLeaflet);

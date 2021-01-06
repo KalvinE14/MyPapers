@@ -213,8 +213,8 @@ class UserController extends Controller
                 $totalNotification = count($notifications);
 
                 return view('update_profile', ['user' => $user])
-                    ->with('totalCv', $cvPercentage)->with('totalBrochure', count($totalCv))
-                    ->with('cvPercentage', $brochurePercentage)->with('brochurePercentage',  count($totalBrochure))
+                    ->with('totalCv', count($totalCv))->with('totalBrochure', count($totalBrochure))
+                    ->with('cvPercentage', $cvPercentage)->with('brochurePercentage',  $brochurePercentage)
                     ->with('leafletPercentage', $leafletPercentage)->with('totalLeaflet', count($totalLeaflet))
                     ->with('notifications', $notifications)->with('totalNotification', $totalNotification);
             }
